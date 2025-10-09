@@ -1,0 +1,221 @@
+/* Assurez-vous que le container est centré */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Centrer le contenu horizontalement */
+    padding: 20px;
+    width: 100%;
+  }
+  
+  /* Centrer la table avec un peu d'espace autour */
+  .table {
+    width: 80%; /* Ajustez la largeur de la table selon vos besoins */
+    margin: 20px auto; /* Centrer la table et ajouter un peu d'espace autour */
+    border-collapse: collapse; /* S'assurer que les bordures ne se chevauchent pas */
+  }
+  
+  /* Pour donner un aspect soigné aux cellules */
+  th, td {
+    padding: 10px 15px;
+    text-align: left;
+    border: 1px solid #ddd; /* Ajouter une bordure légère */
+  }
+  
+  /* Appliquer une couleur de fond aux en-têtes de la table */
+  th {
+    background-color: #f2f2f2;
+  }
+  /* Styles pour le conteneur de pagination */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px; /* Espacement entre les éléments */
+  padding: 16px;
+  background-color: #f8f9fa; /* Couleur de fond */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+/* Styles pour les boutons de pagination */
+.pagination-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #007bff; /* Couleur du texte */
+  background-color: transparent;
+  border: 1px solid #007bff; /* Bordure */
+  border-radius: 4px; /* Coins arrondis */
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Style au survol des boutons */
+.pagination-btn:hover:not([disabled]) {
+  background-color: #007bff; /* Fond bleu au survol */
+  color: white; /* Texte blanc au survol */
+}
+
+/* Style pour les boutons désactivés */
+.pagination-btn[disabled] {
+  color: #6c757d; /* Couleur du texte gris */
+  border-color: #6c757d; /* Bordure grise */
+  cursor: not-allowed; /* Curseur interdit */
+}
+
+/* Style pour le texte d'information */
+.pagination-info {
+  font-size: 16px;
+  color: #333; /* Couleur du texte */
+  font-weight: bold;
+}
+
+/* Styles spécifiques pour le bouton "Previous" */
+.prev-btn {
+  margin-right: auto; /* Alignement à gauche */
+}
+
+/* Styles spécifiques pour le bouton "Next" */
+.next-btn {
+  margin-left: auto; /* Alignement à droite */
+}
+/* Exemple de styles pour les icônes */
+.text-green-600 {
+  color: #16A34A;
+}
+
+.text-yellow-600 {
+  color: #F59E0B;
+}
+
+.text-red-600 {
+  color: #EF4444;
+}
+
+i.fa {
+  font-size: 20px; /* Ajuste la taille des icônes */
+}
+
+/* Filtres */
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem; /* Ajouter un espace sous les filtres */
+}
+
+.filters label {
+  font-weight: 500;
+  color: var(--gray-color);
+}
+
+.status-filter {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: var(--border-radius);
+  background-color: white;
+  color: var(--dark-color);
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.status-filter:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+}
+
+/* Grille de statistiques */
+/* Grille de statistiques */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Trois colonnes égales */
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+
+.stat-card {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+  border-top: 4px solid transparent;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card.pending {
+  border-top-color: var(--warning-color);
+}
+
+.stat-card.approved {
+  border-top-color: var(--success-color);
+}
+
+.stat-card.rejected {
+  border-top-color: var(--danger-color);
+}
+
+.stat-content h3 {
+  font-size: 1rem;
+  color: var(--gray-color);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.stat-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--dark-color);
+}
+
+.stat-budget {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--gray-color);
+}
+
+.stat-trend {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--gray-color);
+}
+
+.stat-trend i {
+  font-size: 1.2rem; /* Ajuste la taille des icônes */
+}
+
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--dark-color);
+}
+
+.stat-budget {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--gray-color);
+}
+
+.stat-trend {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--gray-color);
+}

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Builderz - Construction Company Website Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Construction Company Website Template" name="keywords">
+        <meta content="Construction Company Website Template" name="description">
+
+        <!-- Favicon -->
+        <link href="assets/img/favicon.ico" rel="icon">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/src/assets/lib/flaticon/font/flaticon.css">
+        <link rel="stylesheet" href="/src/assets/lib/animate/animate.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/owlcarousel/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/lightbox/css/lightbox.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/slick/slick.css">
+        <link rel="stylesheet" href="/src/assets/lib/slick/slick-theme.css">
+        <link rel="stylesheet" href="/src/assets/css/style.css">
+
+        
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <!-- Top Bar Start -->
+            <div class="top-bar">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-lg-4 col-md-12">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <h1>Builderz</h1>
+                                    <!-- <img src="img/logo.jpg" alt="Logo"> -->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-7 d-none d-lg-block">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class="flaticon-calendar"></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Opening Hour</h3>
+                                            <p>Mon - Fri, 8:00 - 9:00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class="flaticon-call"></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Call Us</h3>
+                                            <p>+012 345 6789</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class="flaticon-send-mail"></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Email Us</h3>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Top Bar End -->
+
+            <!-- Nav Bar Start -->
+            <div class="nav-bar">
+                <div class="container-fluid">
+                    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+                        <a href="#" class="navbar-brand">MENU</a>
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                            <div class="navbar-nav mr-auto">
+                                <a routerLink="/index" class="nav-item nav-link">Home</a>
+ 
+                                <a routerLink="/about" class="nav-item nav-link">About</a>
+                                <a routerLink="/blog" class="nav-item nav-link">Blog</a>
+                                <a routerLink="/service" class="nav-item nav-link">Service</a>
+                                <a routerLink="/single" class="nav-item nav-link">Single</a>
+                                <a routerLink="/team" class="nav-item nav-link">Team</a>
+                                <a routerLink="/tache" class="nav-item nav-link active">Task</a>
+                                <a  routerLink="/portfolio" class="nav-item nav-link ">Project</a>
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Pages</a>
+                                    <div class="dropdown-menu">
+                                        <a href="blog.html" class="dropdown-item">Blog Page</a>
+                                        <a href="single.html" class="dropdown-item">Single Page</a>
+                                    </div>
+                                </div>
+                                <a routerLink="/contact" class="nav-item nav-link">Contact</a>
+                            </div>
+                            <div class="ml-auto">
+                                <a class="btn" href="#">Get A Quote</a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- Nav Bar End --><div class="container mt-5">
+  <div class="table-wrapper">
+    <h2 class="section-title">List of Steps</h2>
+    <!-- Add this debug section temporarily -->
+    <div *ngIf="etapes.length > 0" class="alert alert-info">
+      Number of steps loaded: {{etapes.length}}
+    </div>
+    
+    <div class="table-responsive">
+      <div *ngIf="etapes.length === 0" class="alert alert-info">
+        No steps found. Please add some steps.
+      </div>
+      <table *ngIf="etapes.length > 0" class="table table-striped table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Associated Task</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let etape of etapes">
+            <td>{{etape.nom}}</td>
+            <td>{{etape.description}}</td>
+            <td>{{etape.dateDebut | date:'shortDate'}}</td>
+            <td>{{etape.dateFin | date:'shortDate'}}</td>
+            <td>
+              <span class="badge" [ngClass]="getStatusClass(etape.statut)">
+                {{getStatusLabel(etape.statut)}}
+              </span>
+            </td>
+            <td>{{getTacheName(etape?.tacheId)}}</td>
+            <td>
+              <div class="action-buttons">
+                <button (click)="etape.tacheId && filterEtapesByTache(etape.tacheId)"  [routerLink]="['/fi', etape.id]"class="action-btn steps-btn">
+                  <i class="fas fa-list-ul"></i>
+                </button>
+                <button class="btn btn-sm btn-info mr-2" [routerLink]="['/etape/edit', etape.id]">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-sm btn-danger" (click)="confirmDelete(etape.id)">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-sm btn-success mr-2" [routerLink]="['/etapes']">
+        <i class="fas fa-plus"></i>
+      </button>
+      <div class="progress-container mt-3 mb-3">
+        <div class="progress" style="height: 20px;">
+          <div class="progress-bar progress-bar-striped progress-bar-animated"
+               [ngClass]="getProgressColor()"
+               role="progressbar"
+               [style.width.%]="getProgressPercentage()"
+               [attr.aria-valuenow]="getProgressPercentage()"
+               aria-valuemin="0"
+               aria-valuemax="100">
+            {{ getProgressText() }}
+          </div>
+        </div>
+      </div>
+      
+      <style>
+      .progress-container {
+        padding: 10px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      
+      .progress {
+        background-color: #e9ecef;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+      
+      .progress-bar {
+        transition: width 0.6s ease;
+        font-weight: bold;
+        text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+      }
+      </style>
+
+<div class="project-analytics mt-4">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h5>Analyse du Projet</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="metric">
+            <h6>Date estimée de fin</h6>
+            <p>{{ getEstimatedCompletionDate() | date:'mediumDate' }}</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="metric">
+            <h6>Score de Productivité</h6>
+            <p>{{ getProductivityScore() | number:'1.0-0' }}%</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="metric">
+            <h6>Santé du Projet</h6>
+            <span [ngClass]="{'badge': true,
+              'badge-success': getProjectHealth() === 'EXCELLENT',
+              'badge-info': getProjectHealth() === 'GOOD',
+              'badge-warning': getProjectHealth() === 'FAIR',
+              'badge-danger': getProjectHealth() === 'NEEDS_ATTENTION'
+            }">
+              {{ getProjectHealth() }}
+            </span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="suggestions mt-3">
+        <h6>Suggestions d'Amélioration</h6>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let suggestion of getSuggestedActions()">
+            {{ suggestion }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+<style>
+.table-wrapper {
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.section-title {
+  color: #030f27;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.section-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: #fdbe33;
+}
+
+.table th {
+  background-color: #030f27;
+  color: #fff;
+}
+
+.badge {
+  padding: 8px 12px;
+  border-radius: 20px;
+}
+
+.badge-warning {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.badge-success {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.badge-secondary {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.btn-sm {
+  padding: 5px 10px;
+  margin: 0 2px;
+}
+
+.btn-info {
+  background-color: #fdbe33;
+  border-color: #fdbe33;
+  color: #030f27;
+}
+
+.btn-info:hover {
+  background-color: #030f27;
+  color: #fdbe33;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+</style>
+
+
+<!-- Add this after your table or list -->
+
+<style>
+.notification {
+  position: fixed;
+  top: 20px;
+  right: -400px;
+  padding: 15px 25px;
+  border-radius: 4px;
+  background: #ffffff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: all 0.5s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+.notification.show {
+  right: 20px;
+}
+
+.notification.success {
+  border-left: 4px solid #fdbe33;
+}
+
+.notification.error {
+  border-left: 4px solid #ff3333;
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.notification-content i {
+  font-size: 20px;
+}
+
+.notification.success i {
+  color: #fdbe33;
+}
+
+.notification.error i {
+  color: #ff3333;
+}
+
+.notification-content span {
+  color: #030f27;
+  font-weight: 500;
+  font-size: 14px;
+}
+</style>
+
+<!-- Footer Start -->
+<div class="footer wow fadeIn" data-wow-delay="0.3s">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-3">
+                <div class="footer-contact">
+                    <h2>Office Contact</h2>
+                    <p><i class="fa fa-map-marker-alt"></i>123 Street, New York, USA</p>
+                    <p><i class="fa fa-phone-alt"></i>+012 345 67890</p>
+                   
+                    <div class="footer-social">
+                        <a href=""><i class="fab fa-twitter"></i></a>
+                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                        <a href=""><i class="fab fa-youtube"></i></a>
+                        <a href=""><i class="fab fa-instagram"></i></a>
+                        <a href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="footer-link">
+                    <h2>Services Areas</h2>
+                    <a href="">Building Construction</a>
+                    <a href="">House Renovation</a>
+                    <a href="">Architecture Design</a>
+                    <a href="">Interior Design</a>
+                    <a href="">Painting</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="footer-link">
+                    <h2>Useful Pages</h2>
+                    <a href="">About Us</a>
+                    <a href="">Contact Us</a>
+                    <a href="">Our Team</a>
+                    <a href="">Projects</a>
+                    <a href="">Testimonial</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="newsletter">
+                    <h2>Newsletter</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulpu
+                    </p>
+                    <div class="form">
+                        <input class="form-control" placeholder="Email here">
+                        <button class="btn">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container footer-menu">
+        <div class="f-menu">
+            <a href="">Terms of use</a>
+            <a href="">Privacy policy</a>
+            <a href="">Cookies</a>
+            <a href="">Help</a>
+            <a href="">FQAs</a>
+        </div>
+    </div>
+    <div class="container copyright">
+        <div class="row">
+            <div class="col-md-6">
+                <p>&copy; <a href="#">Your Site Name</a>, All Right Reserved.</p>
+            </div>
+            <div class="col-md-6">
+                <p>Designed By <a href="https://htmlcodex.com">HTML Codex</a></p>
+            </div>
+        </div>
+    </div>
+  </div>
+  <!-- Footer End -->
+  
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+  </div>
+  
+  <!-- JavaScript Libraries -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/wow/wow.min.js"></script>
+  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="lib/isotope/isotope.pkgd.min.js"></script>
+  <script src="lib/lightbox/js/lightbox.min.js"></script>
+  <script src="lib/waypoints/waypoints.min.js"></script>
+  <script src="lib/counterup/counterup.min.js"></script>
+  <script src="lib/slick/slick.min.js"></script>
+  
+  

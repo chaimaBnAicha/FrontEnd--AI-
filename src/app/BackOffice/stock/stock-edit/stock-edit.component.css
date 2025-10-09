@@ -1,0 +1,39 @@
+.btn {
+    color: #ffffff;
+    background: #fdbe33;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 0;
+    transition: .3s;
+}
+
+.btn:hover {
+    color: #fdbe33;
+    background: #030f27;
+}
+
+.card {
+    margin-bottom: 30px;
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 0 30px rgba(0,0,0,.1);
+}
+
+.form-control {
+    height: 45px;
+    border-radius: 0;
+}
+
+.form-control:focus {
+    border-color: #fdbe33;
+    box-shadow: none;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.card-title {
+    color: #030f27;
+    margin-bottom: 20px;
+} 

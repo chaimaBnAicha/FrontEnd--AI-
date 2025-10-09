@@ -1,0 +1,51 @@
+<div class="container">
+  <h2>Gestion des Étapes</h2>
+  <form (ngSubmit)="onSubmit()" #etapeForm="ngForm">
+    <div class="form-group">
+      <label for="tache">Tâche associée:</label>
+      <select id="tache" [(ngModel)]="selectedTacheId" name="tacheId" class="form-control" required>
+        <option [ngValue]="0">Sélectionnez une tâche</option>
+        <option *ngFor="let tache of taches" [ngValue]="tache.id">
+          {{tache.titre || tache.nom}} (ID: {{tache.id}})
+        </option>
+      </select>
+      <div *ngIf="selectedTacheId === 0" class="alert alert-warning">
+        Veuillez sélectionner une tâche
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="nom">Nom de l'étape:</label>
+      <input type="text" id="nom" [(ngModel)]="etape.nom" name="nom" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea id="description" [(ngModel)]="etape.description" name="description" class="form-control" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="dateDebut">Date de début:</label>
+      <input type="datetime-local" id="dateDebut" [(ngModel)]="etape.dateDebut" name="dateDebut" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+      <label for="dateFin">Date de fin:</label>
+      <input type="datetime-local" id="dateFin" [(ngModel)]="etape.dateFin" name="dateFin" class="form-control" required>
+    </div>
+
+    <button type="submit" [disabled]="!selectedTacheId || !etapeForm.form.valid">Enregistrer</button>
+  </form>
+
+  <div class="etapes-list">
+    <h3>Liste des étapes</h3>
+    <div *ngFor="let etape of etapes" class="etape-item">
+      <h4>{{etape.nom}}</h4>
+      <p>{{etape.description}}</p>
+      <p>Début: {{etape.dateDebut | date:'short'}}</p>
+      <p>Fin: {{etape.dateFin | date:'short'}}</p>
+      <button (click)="modifier(etape)">Modifier</button>
+      <button *ngIf="etape.id" (click)="supprimer(etape.id)">Supprimer</button>
+    </div>
+  </div>
+</div>

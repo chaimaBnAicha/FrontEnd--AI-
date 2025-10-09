@@ -1,0 +1,144 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title">Détails de la Facture</h4>
+          </div>
+        </div>
+        <div class="card-body">
+          <!-- Message de succès pour le paiement -->
+          <div *ngIf="paymentSuccessMessage" class="alert alert-success payment-success-alert">
+            <i class="pe-7s-check-circle me-2"></i>
+            <span>{{ paymentSuccessMessage }}</span>
+            <button type="button" class="btn-close float-end" aria-label="Close" (click)="paymentSuccessMessage = null"></button>
+          </div>
+          
+          <div *ngIf="loading" class="text-center p-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Chargement...</span>
+            </div>
+          </div>
+
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+          </div>
+
+          <div class="bill-details" *ngIf="!loading && !errorMessage && bill" #printSection>
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <div class="bill-header">
+                  <h5>Facture #{{ bill.num_Bill }}</h5>
+                  <p class="text-muted">
+                    Date d'émission: {{ bill.date | date: 'dd/MM/yyyy' }}
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-6 text-end">
+                <div class="status-badge">
+                  <span [ngClass]="'badge ' + getPaymentStatusClass(bill.paymentMode)">
+                    {{ getStatusDisplay(bill.status) }}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <tbody>
+                  <tr>
+                    <th style="width: 30%">Numéro de facture</th>
+                    <td>{{ bill.num_Bill }}</td>
+                  </tr>
+                  <tr>
+                    <th>Date</th>
+                    <td>{{ bill.date | date: 'dd/MM/yyyy' }}</td>
+                  </tr>
+                  <tr>
+                    <th>Montant total</th>
+                    <td>{{ bill.total_Amount | currency:'EUR' }}</td>
+                  </tr>
+                  <tr>
+                    <th>Statut</th>
+                    <td>{{ getStatusDisplay(bill.status) }}</td>
+                  </tr>
+                  <tr>
+                    <th>Mode de paiement</th>
+                    <td>{{ getPaymentModeDisplay(bill.paymentMode) }}</td>
+                  </tr>
+                  <tr>
+                    <th>Stock associé</th>
+                    <td>
+                      <div *ngIf="bill.stock">
+                        Stock #{{ bill.stock.id_stock }}
+                      </div>
+                      <div *ngIf="!bill.stock">Aucun stock associé</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <!-- Boutons d'action avec bouton PDF et bouton Payer -->
+            <div class="row mt-4">
+              <div class="col-12 d-flex justify-content-center action-buttons">
+                <button class="btn custom-pdf-btn me-3" (click)="generatePDF()" [disabled]="generatingPdf">
+                  <span *ngIf="generatingPdf" class="spinner-border spinner-border-sm me-1"></span>
+                  <i *ngIf="!generatingPdf" class="pe-7s-file"></i>
+                  {{ generatingPdf ? 'Génération...' : 'Télécharger en PDF' }}
+                </button>
+                
+                <!-- Nouveau bouton pour le paiement -->
+                <button 
+                  *ngIf="bill.paymentMode !== 'PAID'"
+                  class="btn custom-pay-btn me-3" 
+                  (click)="payBill()" 
+                  [disabled]="processingPayment">
+                  <span *ngIf="processingPayment" class="spinner-border spinner-border-sm me-1"></span>
+                  <i *ngIf="!processingPayment" class="pe-7s-credit"></i>
+                  {{ processingPayment ? 'Traitement...' : 'Payer maintenant' }}
+                </button>
+                
+                <button class="btn custom-edit-btn me-3" (click)="editBill()" *ngIf="bill">
+                  <i class="pe-7s-pen"></i> Modifier
+                </button>
+                <button class="btn custom-back-btn" (click)="goBack()">
+                  <i class="pe-7s-back-2"></i> Retour
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de paiement -->
+<div class="payment-modal-overlay" *ngIf="showPaymentModal" (click)="closePaymentModal()">
+  <div class="payment-modal-content" (click)="$event.stopPropagation()">
+    <div class="payment-modal-header">
+      <h4>Paiement de la facture</h4>
+      <button type="button" class="payment-modal-close" (click)="closePaymentModal()">&times;</button>
+    </div>
+    <div class="payment-modal-body">
+      <div class="payment-info-alert">
+        <h5><i class="pe-7s-info me-2"></i> Comment remplir le formulaire de paiement</h5>
+        <ul>
+          <li>Entrez votre <strong>numéro de carte</strong> (4242 4242 4242 4242 pour tester)</li>
+          <li>Indiquez la <strong>date d'expiration</strong> (une date future, ex: 12/25)</li>
+          <li>Ajoutez le <strong>code de sécurité CVC</strong> (3 chiffres, ex: 123)</li>
+          <li>Remplissez les autres informations demandées</li>
+        </ul>
+      </div>
+      
+      <div id="payment-element-container" class="stripe-element-container"></div>
+      <div id="payment-message" class="payment-message"></div>
+    </div>
+    <div class="payment-modal-footer">
+      <button id="submit-payment" class="btn btn-primary">Payer maintenant</button>
+      <button class="btn btn-secondary" (click)="closePaymentModal()">Annuler</button>
+    </div>
+  </div>
+</div>

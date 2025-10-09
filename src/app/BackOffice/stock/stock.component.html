@@ -1,0 +1,316 @@
+<!-- Notification Component -->
+<app-notification></app-notification>
+
+<!-- Stock Management Content -->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4 class="card-title">Stock Management</h4>
+                            <div class="d-flex align-items-center">
+                                <div class="notifications-icon me-3" (click)="toggleNotifications()">
+                                    <i class="pe-7s-bell"></i>
+                                    <span class="notification-badge" *ngIf="unreadCount > 0">
+                                        {{unreadCount}}
+                                    </span>
+                                    
+                                    <div class="notifications-dropdown" *ngIf="showNotificationsList">
+                                        <div class="notifications-header">
+                                            <span>Notifications</span>
+                                            <span class="clear-button" (click)="clearNotifications()">
+                                                <i class="pe-7s-trash"></i> Clear all
+                                            </span>
+                                        </div>
+                                        <div class="notification-item" *ngFor="let notification of notifications" [ngClass]="notification.type">
+                                            <div class="notification-content">
+                                                {{notification.message}}
+                                            </div>
+                                        </div>
+                                        <div class="notification-item" *ngIf="notifications.length === 0">
+                                            <div class="notification-content">
+                                                No notifications
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-info" (click)="openStatsModal(statsModal)">
+                                    <i class="fa fa-chart-bar"></i> View Statistics
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="filters-container">
+                            <!-- Champ de recherche -->
+                            <div class="search-filter mb-3">
+                                <label class="mr-2">Search by Name:</label>
+                                <input type="text" 
+                                       class="form-control d-inline-block w-auto" 
+                                       placeholder="Search stocks..." 
+                                       [(ngModel)]="searchTerm"
+                                       (input)="onSearch($event)"
+                                       name="search">
+                            </div>
+
+                            <!-- Filtre par catégorie existant -->
+                            <div class="category-filter mb-3">
+                                <label class="mr-2">Filter by Category:</label>
+                                <select class="form-control d-inline-block w-auto" 
+                                        [(ngModel)]="selectedCategory" 
+                                        (change)="onCategoryChange($event)">
+                                    <option value="ALL">All Categories</option>
+                                    <option *ngFor="let cat of categories" [value]="cat">
+                                        {{cat}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Add Stock Form -->
+                        <form (ngSubmit)="addStock()">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input type="text" class="form-control" 
+                                               [ngClass]="{'is-invalid': formErrors.name}"
+                                               [(ngModel)]="newStock.name" 
+                                               name="name"
+                                               (blur)="validateName(newStock.name || '')">
+                                        <div class="invalid-feedback" *ngIf="formErrors.name">
+                                            {{ formErrors.name }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Quantity</label>
+                                        <input type="number" class="form-control" 
+                                               [ngClass]="{'is-invalid': formErrors.quantity}"
+                                               [(ngModel)]="newStock.quantity" 
+                                               name="quantity"
+                                               (blur)="validateQuantity(newStock.quantity || 0)">
+                                        <div class="invalid-feedback" *ngIf="formErrors.quantity">
+                                            {{ formErrors.quantity }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Price</label>
+                                        <input type="number" class="form-control" 
+                                               [ngClass]="{'is-invalid': formErrors.unitPrice}"
+                                               [(ngModel)]="newStock.unitPrice" 
+                                               name="unitPrice"
+                                               (blur)="validateUnitPrice(newStock.unitPrice || 0)">
+                                        <div class="invalid-feedback" *ngIf="formErrors.unitPrice">
+                                            {{ formErrors.unitPrice }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Category</label>
+                                        <select class="form-control" [(ngModel)]="newStock.category" name="category">
+                                            <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea class="form-control" 
+                                                 [ngClass]="{'is-invalid': formErrors.description}"
+                                                 [(ngModel)]="newStock.description" 
+                                                 name="description"
+                                                 (blur)="validateDescription(newStock.description || '')"
+                                                 placeholder="Description"></textarea>
+                                        <div class="invalid-feedback" *ngIf="formErrors.description">
+                                            {{ formErrors.description }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>&nbsp;</label>
+                                        <button type="submit" class="btn btn-primary btn-block">Add Stock</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Stock List -->
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="text-primary">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Category</th>
+                                        <th>Description</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let stock of filteredStocks">
+                                        <td>{{stock.name}}</td>
+                                        <td>{{stock.quantity}}</td>
+                                        <td>{{stock.unitPrice}}</td>
+                                        <td>{{stock.category}}</td>
+                                        <td>{{stock.description}}</td>
+                                        <td>
+                                            <button class="btn btn-info btn-sm" [routerLink]="['/admin/stock/edit', stock.id_stock]">
+                                                <i class="pe-7s-pen"></i>
+                                            </button>
+                                            <button class="btn btn-danger btn-sm ml-2" (click)="deleteStock(stock.id_stock)">
+                                                <i class="pe-7s-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Start -->
+<div class="footer wow fadeIn" data-wow-delay="0.3s">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-3">
+                <div class="footer-contact">
+                    <h2>Office Contact</h2>
+                    <p><i class="fa fa-map-marker-alt"></i>123 Street, New York, USA</p>
+                    <p><i class="fa fa-phone-alt"></i>+012 345 67890</p>
+                    <div class="footer-social">
+                        <a href=""><i class="fab fa-twitter"></i></a>
+                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                        <a href=""><i class="fab fa-youtube"></i></a>
+                        <a href=""><i class="fab fa-instagram"></i></a>
+                        <a href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="footer-link">
+                    <h2>Services Areas</h2>
+                    <a href="">Building Construction</a>
+                    <a href="">House Renovation</a>
+                    <a href="">Architecture Design</a>
+                    <a href="">Interior Design</a>
+                    <a href="">Painting</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="footer-link">
+                    <h2>Useful Pages</h2>
+                    <a href="">About Us</a>
+                    <a href="">Contact Us</a>
+                    <a href="">Our Team</a>
+                    <a href="">Projects</a>
+                    <a href="">Testimonial</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="newsletter">
+                    <h2>Newsletter</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulpu
+                    </p>
+                    <div class="form">
+                        <input class="form-control" placeholder="Email here">
+                        <button class="btn">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container footer-menu">
+        <div class="f-menu">
+            <a href="">Terms of use</a>
+            <a href="">Privacy policy</a>
+            <a href="">Cookies</a>
+            <a href="">Help</a>
+            <a href="">FQAs</a>
+        </div>
+    </div>
+    <div class="container copyright">
+        <div class="row">
+            <div class="col-md-6">
+                <p>&copy; <a href="#">Your Site Name</a>, All Right Reserved.</p>
+            </div>
+            <div class="col-md-6">
+                <p>Designed By <a href="https://htmlcodex.com">HTML Codex</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+<!-- Add this modal template at the end of the file, before the footer -->
+<ng-template #statsModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Stock Statistics</h4>
+        <button type="button" class="close" (click)="modal.dismiss()">
+            <span>&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="stats-container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="stat-card">
+                        <h5>Total Items</h5>
+                        <p class="stat-value">{{ stockStats.totalItems }}</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="stat-card">
+                        <h5>Total Value</h5>
+                        <p class="stat-value">{{ stockStats.totalValue | currency:'EUR' }}</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="stat-card">
+                        <h5>Average Price</h5>
+                        <p class="stat-value">{{ stockStats.averagePrice | currency:'EUR' }}</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="stat-card">
+                        <h5>Low Stock Items</h5>
+                        <p class="stat-value">{{ stockStats.lowStockItems }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-stats mt-4">
+                <h5>Items by Category</h5>
+                <div class="progress-bars">
+                    <div class="category-item" *ngFor="let category of categories">
+                        <label>{{ category }}</label>
+                        <div class="progress">
+                            <div class="progress-bar" 
+                                 [style.width.%]="(stockStats.categoryCounts[category] / stocks.length) * 100">
+                                {{ stockStats.categoryCounts[category] }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close()">Close</button>
+    </div>
+</ng-template>

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Builderz - Construction Company Website Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Construction Company Website Template" name="keywords">
+        <meta content="Construction Company Website Template" name="description">
+        <!-- Include jQuery (required for CounterUp) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include CounterUp -->
+<script src="https://cdn.rawgit.com/barskins/jquery-countTo/master/jquery.counterup.min.js"></script>
+
+
+        <!-- Favicon -->
+        <link href="assets/img/favicon.ico" rel="icon">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/src/assets/lib/flaticon/font/flaticon.css">
+        <link rel="stylesheet" href="/src/assets/lib/animate/animate.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/owlcarousel/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/lightbox/css/lightbox.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/slick/slick.css">
+        <link rel="stylesheet" href="/src/assets/lib/slick/slick-theme.css">
+        <link rel="stylesheet" href="/src/assets/css/style.css">
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card shadow-lg">
+                            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center py-3">
+                                <h3 class="mb-0">Available Offers</h3>
+                                <div class="d-flex align-items-center">
+                                    <button class="btn btn-light" (click)="navigateToAddOffer()">
+                                        <i class="fas fa-plus"></i> Add New Offer
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-striped">
+                                        <thead class="bg-light">
+                                            <tr>
+                                                <th class="py-3">
+                                                    <div class="d-flex flex-column">
+                                                        <span>Title</span>
+                                                        <input 
+                                                            type="text" 
+                                                            class="form-control form-control-sm mt-2" 
+                                                            placeholder="Filter title..."
+                                                            (input)="onSearch('title', $event)"
+                                                        >
+                                                    </div>
+                                                </th>
+                                                <th class="py-3">
+                                                    <div class="d-flex flex-column">
+                                                        <span>Description</span>
+                                                        <input 
+                                                            type="text" 
+                                                            class="form-control form-control-sm mt-2" 
+                                                            placeholder="Filter description..."
+                                                            (input)="onSearch('description', $event)"
+                                                        >
+                                                    </div>
+                                                </th>
+                                                <th class="py-3">
+                                                    <div class="d-flex flex-column">
+                                                        <span>Start Date</span>
+                                                        <input 
+                                                            type="date" 
+                                                            class="form-control form-control-sm mt-2"
+                                                            (input)="onSearch('startDate', $event)"
+                                                        >
+                                                    </div>
+                                                </th>
+                                                <th class="py-3">
+                                                    <div class="d-flex flex-column">
+                                                        <span>End Date</span>
+                                                        <input 
+                                                            type="date" 
+                                                            class="form-control form-control-sm mt-2"
+                                                            (input)="onSearch('endDate', $event)"
+                                                        >
+                                                    </div>
+                                                </th>
+                                                <th class="py-3">
+                                                    <div class="d-flex flex-column">
+                                                        <span>Type</span>
+                                                        <select 
+                                                            class="form-control form-control-sm mt-2"
+                                                            (change)="onSearch('type', $event)"
+                                                        >
+                                                            <option value="">All</option>
+                                                            <option value="Insurance">Insurance</option>
+                                                            <option value="Bonus">Bonus</option>
+                                                            <option value="Compensation">Compensation</option>
+                                                            <option value="Training">Training</option>
+                                                        </select>
+                                                    </div>
+                                                </th>
+                                                <th class="py-3">
+                                                    <div class="d-flex flex-column">
+                                                        <span>Status</span>
+                                                        <select 
+                                                            class="form-control form-control-sm mt-2"
+                                                            (change)="onSearch('status', $event)"
+                                                        >
+                                                            <option value="">All</option>
+                                                            <option value="ACTIVE">Active</option>
+                                                            <option value="INACTIVE">Inactive</option>
+                                                        </select>
+                                                    </div>
+                                                </th>
+                                                <th class="py-3 text-center">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngIf="isLoading">
+                                                <td colspan="7" class="text-center py-4">
+                                                    <i class="fas fa-spinner fa-spin fa-2x text-primary mb-3"></i>
+                                                    <p class="text-muted mb-0">Loading offers...</p>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr *ngIf="error">
+                                                <td colspan="7" class="text-center py-4">
+                                                    <i class="fas fa-exclamation-circle fa-2x text-danger mb-3"></i>
+                                                    <p class="text-danger mb-0">{{ error }}</p>
+                                                </td>
+                                            </tr>
+
+                                            <tr *ngFor="let offer of paginatedOffers">
+                                                <td class="align-middle">{{ offer.Title }}</td>
+                                                <td class="align-middle" [innerHTML]="offer.Description "></td>
+                                                <td class="align-middle">{{ offer.Start_Date | date:'mediumDate' }}</td>
+                                                <td class="align-middle">{{ offer.End_Date | date:'mediumDate' }}</td>
+                                                <td class="align-middle">
+                                                    <span class="badge type-badge" [ngClass]="offer.Typeoffer.toLowerCase()">
+                                                        {{ offer.Typeoffer }}
+                                                    </span>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <span class="badge rounded-pill" [ngClass]="{
+                                                        'bg-success': offer.Status === OfferStatus.ACTIVE,
+                                                        'bg-danger': offer.Status === OfferStatus.INACTIVE
+                                                    }">
+                                                        {{ offer.Status }}
+                                                    </span>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <button 
+                                                        class="btn btn-sm btn-outline-primary me-2" 
+                                                        (click)="editOffer(offer.id_offer)"
+                                                        [disabled]="!offer.id_offer"
+                                                        title="Edit"
+                                                    >
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button 
+                                                        class="btn btn-sm btn-outline-danger" 
+                                                        (click)="deleteOffer(offer.id_offer)"
+                                                        [disabled]="!offer.id_offer"
+                                                        title="Delete"
+                                                    >
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+
+                                            <tr *ngIf="!isLoading && !error && filteredOffers.length === 0">
+                                                <td colspan="7" class="text-center py-4">
+                                                    <i class="fas fa-inbox fa-2x text-muted mb-3"></i>
+                                                    <p class="text-muted mb-0">No offers available</p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-between align-items-center mt-3 mb-3">
+                <div class="text-muted">
+                    Showing {{ (currentPage - 1) * pageSize + 1 }} to {{ Math.min(currentPage * pageSize, filteredOffers.length) }} of {{ filteredOffers.length }} offers
+                </div>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination mb-0">
+                        <li class="page-item" [class.disabled]="currentPage === 1">
+                            <a class="page-link" href="javascript:void(0)" (click)="onPageChange(currentPage - 1)">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        </li>
+                        <li class="page-item" *ngFor="let page of getPages()" [class.active]="page === currentPage">
+                            <a class="page-link" href="javascript:void(0)" (click)="onPageChange(page)">{{ page }}</a>
+                        </li>
+                        <li class="page-item" [class.disabled]="currentPage === totalPages">
+                            <a class="page-link" href="javascript:void(0)" (click)="onPageChange(currentPage + 1)">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    </body>
+</html>
+
+<style>
+.card {
+  border: none;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+.card-header {
+  border-radius: 10px 10px 0 0 !important;
+  background-color: #fdbe33 !important; /* Yellow header instead of blue */
+  border-bottom: none;
+}
+
+.card-header h3 {
+  color: #030f27 !important; /* Dark blue/black color */
+  font-weight: 700;
+}
+
+.table th {
+  font-weight: 600;
+  color: #030f27;
+  border-bottom: 2px solid #fdbe33;
+}
+
+.badge {
+  padding: 8px 12px;
+  font-weight: 500;
+}
+
+.badge.bg-success {
+  background-color: #fdbe33 !important; /* Yellow for active status */
+  color: #030f27;
+}
+
+.badge.bg-danger {
+  background-color: #030f27 !important; /* Dark for inactive status */
+  color: #fdbe33;
+}
+
+.btn-outline-primary, .btn-outline-danger {
+  padding: 0.375rem 0.75rem;
+  transition: all 0.3s;
+  border-color: #fdbe33;
+  color: #030f27;
+}
+
+.btn-outline-primary:hover, .btn-light:hover {
+  background-color: #fdbe33;
+  border-color: #fdbe33;
+  color: #030f27;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(253, 190, 51, 0.3);
+}
+
+.btn-outline-danger {
+  border-color: #030f27;
+}
+
+.btn-outline-danger:hover {
+  background-color: #030f27;
+  border-color: #030f27;
+  color: #fdbe33;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(253, 190, 51, 0.05);
+}
+
+.btn-light {
+  background-color: #030f27;
+  border: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s;
+  color: #fdbe33;
+}
+
+.fas {
+  margin-right: 5px;
+}
+
+.table td {
+  vertical-align: middle;
+  color: #666666;
+  border-color: #eeeeee;
+}
+
+.shadow-lg {
+  box-shadow: 0 0.5rem 1rem rgba(3, 15, 39, 0.15) !important;
+}
+
+/* Add these new styles */
+.text-muted {
+  color: #666666 !important;
+  font-size: 0.9rem;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Empty state styling */
+.fa-inbox {
+  color: #fdbe33;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* Add hover effect to the back-to-top button */
+.back-to-top {
+  background: #fdbe33;
+  color: #030f27;
+  transition: all 0.3s;
+}
+
+.back-to-top:hover {
+  background: #030f27;
+  color: #fdbe33;
+}
+
+.type-badge {
+    background-color: #030f27;
+    color: #fdbe33;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.type-badge.Insurance {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.type-badge.Bonus {
+    background-color: #2196F3;
+    color: white;
+}
+
+.type-badge.Compensation {
+    background-color: #9C27B0;
+    color: white;
+}
+
+.type-badge.Training {
+    background-color: #FF9800;
+    color: white;
+}
+
+/* Add styles for search box */
+.search-box {
+  min-width: 250px;
+}
+
+.search-box .form-control {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #fdbe33;
+  padding: 0.5rem 1rem;
+}
+
+.search-box .form-control:focus {
+  border-color: #030f27;
+  box-shadow: 0 0 0 0.2rem rgba(3, 15, 39, 0.25);
+}
+
+/* Pagination Styles */
+.pagination {
+    margin: 0;
+    padding: 0;
+}
+
+.page-link {
+    color: #030f27;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.page-link:hover {
+    background-color: #fdbe33;
+    color: #030f27;
+}
+
+.page-item.active .page-link {
+    background-color: #fdbe33;
+    color: #030f27;
+    border: none;
+}
+
+.page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #f8f9fa;
+}
+
+.pagination .page-link i {
+    font-size: 0.875rem;
+}
+</style>

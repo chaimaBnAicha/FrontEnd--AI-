@@ -1,0 +1,65 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Paiement de la Facture</h4>
+        </div>
+        <div class="card-body">
+          <!-- État de chargement -->
+          <div *ngIf="status === 'loading'" class="text-center p-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Chargement...</span>
+            </div>
+            <p class="mt-3">Initialisation du système de paiement...</p>
+          </div>
+
+          <!-- État d'erreur avec indication de retour à la facture -->
+          <div *ngIf="status === 'error'" class="alert alert-danger text-center">
+            <p><strong>{{ message || 'Une erreur est survenue lors de l\'initialisation du paiement' }}</strong></p>
+            <p>Veuillez 
+              <a href="javascript:void(0);" (click)="goToBill()">retourner à la facture</a> et réessayer.
+            </p>
+          </div>
+
+          <!-- Formulaire de paiement - IMPORTANT: le conteneur de paiement est maintenant toujours présent dans le DOM -->
+          <div id="payment-container" [ngClass]="{'d-none': status !== 'processing'}">
+            <div class="payment-form-container">
+              <p class="mb-4">Veuillez compléter les informations de paiement ci-dessous :</p>
+              
+              <!-- Conteneur pour Stripe Elements - toujours présent mais peut être caché -->
+              <div id="payment-form" class="mb-4">
+                <div id="payment-element" class="stripe-element-container"></div>
+              </div>
+              
+              <div *ngIf="message && status === 'processing'" class="alert alert-warning mb-3">
+                {{ message }}
+              </div>
+              
+              <div class="text-center mt-4">
+                <button class="btn btn-primary btn-lg" (click)="processPayment()">
+                  Payer maintenant
+                </button>
+                <button class="btn btn-secondary ms-2" (click)="goToBill()">
+                  Annuler
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- État de succès (affiché après redirection de Stripe) -->
+          <div *ngIf="status === 'success'" class="text-center p-5">
+            <div class="success-icon">
+              <i class="pe-7s-check-circle"></i>
+            </div>
+            <h3 class="mt-3">Paiement effectué avec succès !</h3>
+            <p>{{ message }}</p>
+            <button class="btn btn-primary mt-3" (click)="goToBill()">
+              Retourner à la facture
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

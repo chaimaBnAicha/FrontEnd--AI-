@@ -1,0 +1,145 @@
+.wrapper {
+  position: relative;
+  top: 0;
+  height: 100vh;
+}
+
+.main-panel {
+  position: relative;
+  float: right;
+  width: calc(100% - 260px);
+  background-color: #f4f3ef;
+}
+
+.modern-navbar {
+  background: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 1rem;
+  
+  .navbar-brand {
+    color: #2c3e50;
+    font-weight: 600;
+  }
+  
+  .search-form {
+    max-width: 400px;
+    
+    .input-group {
+      background: #f8f9fa;
+      border-radius: 20px;
+      padding: 0.3rem 0.8rem;
+      
+      input {
+        border: none;
+        background: transparent;
+        
+        &:focus {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+  
+  .notification-icon {
+    font-size: 1.4rem;
+    color: #6c757d;
+  }
+  
+  .notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background: #fdbe33;
+    color: white;
+    border-radius: 50%;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  
+  .notification-dropdown {
+    min-width: 320px;
+    padding: 0;
+    border: none;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    
+    .dropdown-header {
+      background: #f8f9fa;
+      padding: 1rem;
+      font-weight: 600;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .notification-item {
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      
+      &:hover {
+        background: #f8f9fa;
+      }
+      
+      i {
+        font-size: 1.2rem;
+        margin-right: 0.8rem;
+      }
+      
+      .notification-content {
+        p {
+          margin: 0;
+          font-size: 0.9rem;
+        }
+        
+        small {
+          color: #6c757d;
+        }
+      }
+    }
+    
+    .view-all {
+      padding: 0.8rem;
+      text-align: center;
+      color: #fdbe33;
+      font-weight: 500;
+      
+      &:hover {
+        background: #f8f9fa;
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .main-panel {
+    width: 100%;
+  }
+  
+  .modern-navbar {
+    .search-form {
+      margin: 1rem 0;
+    }
+    
+    .notification-dropdown {
+      width: 100%;
+      margin-top: 1rem;
+    }
+  }
+}
+
+.perfect-scrollbar-on .main-panel {
+  height: 100%;
+  max-height: 100%;
+}
+
+.sidebar,
+.main-panel,
+.sidebar-wrapper {
+  -webkit-transition-property: top, bottom, width;
+  transition-property: top, bottom, width;
+  -webkit-transition-duration: .2s, .2s, .35s;
+  transition-duration: .2s, .2s, .35s;
+  -webkit-transition-timing-function: linear, linear, ease;
+  transition-timing-function: linear, linear, ease;
+  -webkit-overflow-scrolling: touch;
+}

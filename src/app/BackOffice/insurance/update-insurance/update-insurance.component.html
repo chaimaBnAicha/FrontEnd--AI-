@@ -1,0 +1,90 @@
+<div class="update-insurance-container">
+  <h2>Update Insurance</h2>
+  <form [formGroup]="insuranceForm" (ngSubmit)="onSubmit()" class="insurance-form">
+    <div class="form-group">
+      <label for="Description">Description</label>
+      <editor
+        formControlName="Description"
+        [init]="editorConfig"
+        id="Description"
+        name="Description"
+        apiKey="bs8c5xfp5pctmes93wot5hlcmxuowt2wk3j2437fw51e5xvt"
+        [inline]="false"
+      ></editor>
+      <div *ngIf="insuranceForm.get('Description')?.invalid && insuranceForm.get('Description')?.touched">
+        <small class="text-danger">Description is required</small>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="start_Date">Start Date</label>
+        <input
+          type="date"
+          id="start_Date"
+          formControlName="start_Date"
+          class="form-control"
+        />
+        <div *ngIf="insuranceForm.get('start_Date')?.invalid && insuranceForm.get('start_Date')?.touched">
+          <small class="text-danger">Start date is required</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="end_Date">End Date</label>
+        <input
+          type="date"
+          id="end_Date"
+          formControlName="end_Date"
+          class="form-control"
+        />
+        <div *ngIf="insuranceForm.get('end_Date')?.invalid && insuranceForm.get('end_Date')?.touched">
+          <small class="text-danger">End date is required</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="amount">Amount</label>
+        <input
+          type="number"
+          id="amount"
+          formControlName="amount"
+          class="form-control"
+          min="0"
+          step="0.01"
+        />
+        <div *ngIf="insuranceForm.get('amount')?.invalid && insuranceForm.get('amount')?.touched">
+          <small class="text-danger">Amount is required and must be positive</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select
+          id="category"
+          formControlName="category"
+          class="form-control"
+        >
+          <option value="">Select a category</option>
+          <option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </option>
+        </select>
+        <div *ngIf="insuranceForm.get('category')?.invalid && insuranceForm.get('category')?.touched">
+          <small class="text-danger">Category is required</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" (click)="navigateToInsuranceList()">
+        Cancel
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="!insuranceForm.valid">
+        Update Insurance
+      </button>
+    </div>
+  </form>
+</div> 

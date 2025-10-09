@@ -1,0 +1,54 @@
+<form [formGroup]="updateRequestForm" >
+    <div>
+      <label for="project_name">Nom du projet :</label>
+      <input id="project_name" required formControlName="project_name" type="text">
+      <div *ngIf="updateRequestForm?.get('project_name')?.invalid && updateRequestForm?.get('project_name')?.touched">
+        Nom du projet est requis.
+      </div>
+    </div>
+  
+    <div>
+      <label for="description">Description :</label>
+      <textarea id="description" required formControlName="description"></textarea>
+      <div *ngIf="updateRequestForm?.get('description')?.invalid && updateRequestForm?.get('description')?.touched">
+        La description est requise.
+      </div>
+    </div>
+  
+    <div>
+      <label for="estimated_budget">Budget estimé :</label>
+      <input id="estimated_budget" required formControlName="estimated_budget" type="number">
+      <div *ngIf="updateRequestForm?.get('estimated_budget')?.invalid && updateRequestForm?.get('estimated_budget')?.touched">
+        Le budget est requis.
+      </div>
+    </div>
+  
+    <div>
+      <label for="estimated_duration">Durée estimée (jours) :</label>
+      <input id="estimated_duration" required formControlName="estimated_duration" type="number">
+      <div *ngIf="updateRequestForm?.get('estimated_duration')?.invalid && updateRequestForm?.get('estimated_duration')?.touched">
+        La durée est requise.
+      </div>
+    </div>
+  
+    
+  
+    <div>
+      <label for="geographic_location">Localisation géographique :</label>
+      <input id="geographic_location" required formControlName="geographic_location" type="text">
+      <div *ngIf="updateRequestForm?.get('geographic_location')?.invalid && updateRequestForm?.get('geographic_location')?.touched">
+        La localisation est requise.
+      </div>
+    </div>
+  
+    <div>
+      <label for="user_id">ID utilisateur :</label>
+      <input id="user_id" required formControlName="user_id" type="text">
+      <div *ngIf="updateRequestForm?.get('user_id')?.invalid && updateRequestForm?.get('user_id')?.touched">
+        L'ID utilisateur est requis.
+      </div>
+    </div>
+  
+    <button type="submit" (click)="updateRequest()">Update</button>
+  </form>
+  

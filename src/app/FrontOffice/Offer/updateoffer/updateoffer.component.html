@@ -1,0 +1,261 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow">
+        <div class="card-header">
+          <h3 class="mb-0">Update Offer</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="offerForm" (ngSubmit)="onSubmit()" class="p-3">
+            <div class="mb-3">
+              <label for="title" class="form-label">Title*</label>
+              <input
+                type="text"
+                class="form-control"
+                id="title"
+                formControlName="title"
+                [ngClass]="{ 'is-invalid': submitted && f['title'].errors }"
+              />
+              <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
+                <div *ngIf="f['title'].errors['required']">Title is required</div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="description" class="form-label">Description*</label>
+              <editor
+                formControlName="description"
+                [init]="editorConfig"
+                apiKey="bs8c5xfp5pctmes93wot5hlcmxuowt2wk3j2437fw51e5xvt"
+                id="description"
+                [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"
+              ></editor>
+              <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+                <div *ngIf="f['description'].errors['required']">Description is required</div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="start_Date" class="form-label">Start Date*</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="start_Date"
+                  formControlName="start_Date"
+                  [min]="today"
+                  (change)="onStartDateChange()"
+                  [ngClass]="{ 'is-invalid': submitted && f['start_Date'].errors }"
+                />
+                <div *ngIf="submitted && f['start_Date'].errors" class="invalid-feedback">
+                  <div *ngIf="f['start_Date'].errors['required']">Start date is required</div>
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="end_Date" class="form-label">End Date*</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="end_Date"
+                  formControlName="end_Date"
+                  [ngClass]="{ 'is-invalid': submitted && (f['end_Date'].errors || offerForm.errors?.['dateError']) }"
+                />
+                <div *ngIf="submitted && (f['end_Date'].errors || offerForm.errors?.['dateError'])" class="invalid-feedback">
+                  <div *ngIf="f['end_Date'].errors?.['required']">End date is required</div>
+                  <div *ngIf="offerForm.errors?.['dateError']">{{getDateErrorMessage()}}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="typeoffer" class="form-label">Type</label>
+              <select
+                class="form-control"
+                id="typeoffer"
+                formControlName="typeoffer"
+              >
+                <option value="Insurance">Insurance</option>
+                <option value="Bonus">Bonus</option>
+                <option value="Compensation">Compensation</option>
+                <option value="Training">Training</option>
+              </select>
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+              <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+              <div>
+                <button type="button" class="btn btn-warning me-2" (click)="onReset()">Reset</button>
+                <button type="submit" class="btn btn-primary">Update Offer</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.card {
+  border: none;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+.card-header {
+  border-radius: 10px 10px 0 0 !important;
+  background-color: #fdbe33 !important;
+  border-bottom: none;
+  padding: 1.5rem;
+}
+
+.card-header h3 {
+  color: #030f27 !important;
+  font-weight: 700;
+  margin: 0;
+}
+
+.form-label {
+  color: #030f27;
+  font-weight: 500;
+}
+
+.form-control {
+  border-color: #eeeeee;
+  padding: 0.75rem;
+}
+
+.form-control:focus {
+  border-color: #fdbe33;
+  box-shadow: 0 0 0 0.2rem rgba(253, 190, 51, 0.25);
+}
+
+.btn-primary {
+  background-color: #fdbe33;
+  border-color: #fdbe33;
+  color: #030f27;
+}
+
+.btn-primary:hover {
+  background-color: #030f27;
+  border-color: #030f27;
+  color: #fdbe33;
+}
+
+.btn-secondary {
+  background-color: #030f27;
+  border-color: #030f27;
+  color: #fdbe33;
+}
+
+.btn-secondary:hover {
+  background-color: #fdbe33;
+  border-color: #fdbe33;
+  color: #030f27;
+}
+
+.btn-warning {
+  background-color: transparent;
+  border-color: #fdbe33;
+  color: #030f27;
+}
+
+.btn-warning:hover {
+  background-color: #fdbe33;
+  color: #030f27;
+}
+
+.invalid-feedback {
+  color: #dc3545;
+}
+
+.shadow {
+  box-shadow: 0 0.5rem 1rem rgba(3, 15, 39, 0.15) !important;
+}
+
+select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23030f27' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 8px 10px;
+}
+
+/* TinyMCE Editor Styles */
+:host ::ng-deep .tox-tinymce {
+  border-color: #eeeeee !important;
+  border-radius: 4px !important;
+}
+
+:host ::ng-deep .tox .tox-toolbar__group {
+  padding: 0 5px !important;
+}
+
+:host ::ng-deep .tox .tox-tbtn {
+  color: #030f27 !important;
+}
+
+:host ::ng-deep .tox .tox-tbtn:hover {
+  background-color: #fdbe33 !important;
+  color: #030f27 !important;
+}
+
+:host ::ng-deep .tox .tox-tbtn--enabled {
+  background-color: #fdbe33 !important;
+  color: #030f27 !important;
+}
+
+:host ::ng-deep .tox .tox-tbtn--enabled:hover {
+  background-color: #030f27 !important;
+  color: #fdbe33 !important;
+}
+
+:host ::ng-deep .tox .tox-toolbar__group:not(:last-of-type) {
+  border-color: #eeeeee !important;
+}
+
+:host ::ng-deep .tox .tox-edit-area__iframe {
+  background-color: #ffffff !important;
+}
+
+:host ::ng-deep .tox .tox-statusbar {
+  border-color: #eeeeee !important;
+}
+
+:host ::ng-deep .tox .tox-statusbar__path-item {
+  color: #030f27 !important;
+}
+
+:host ::ng-deep .tox .tox-statusbar__wordcount {
+  color: #030f27 !important;
+}
+
+:host ::ng-deep .tox .tox-toolbar-overlord {
+  background-color: #ffffff !important;
+}
+
+:host ::ng-deep .tox .tox-toolbar__primary {
+  background-color: #ffffff !important;
+}
+
+:host ::ng-deep .tox .tox-toolbar__group {
+  background-color: #ffffff !important;
+}
+
+:host ::ng-deep .tox .tox-tbtn svg {
+  fill: #030f27 !important;
+}
+
+:host ::ng-deep .tox .tox-tbtn:hover svg {
+  fill: #030f27 !important;
+}
+
+:host ::ng-deep .tox .tox-tbtn--enabled svg {
+  fill: #030f27 !important;
+}
+
+:host ::ng-deep .tox .tox-tbtn--enabled:hover svg {
+  fill: #fdbe33 !important;
+}
+</style>

@@ -1,0 +1,172 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Gestion des Factures</h4>
+        </div>
+        <div class="card-body">
+          <!-- Barre de recherche et filtres améliorés -->
+          <div class="filter-panel mb-4">
+            <div class="row align-items-end">
+              <!-- Recherche par numéro -->
+              <div class="col-md-4">
+                <div class="search-container">
+                  <label class="filter-label">Recherche par numéro</label>
+                  <div class="input-group">
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      placeholder="Entrez un numéro..." 
+                      [(ngModel)]="searchTerm"
+                      (keyup)="applyFilters()">
+                    <div class="input-group-append">
+                      <span class="input-group-text">
+                        <i class="pe-7s-search"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Filtres par statut -->
+              <div class="col-md-3">
+                <label class="filter-label">Méthode de paiement</label>
+                <select class="form-select custom-select" [(ngModel)]="statusFilter" (change)="applyFilters()">
+                  <option value="ALL">Toutes les méthodes</option>
+                  <option *ngFor="let status of statuses" [value]="status">
+                    {{ getPaymentMethodDisplay(status) }}
+                  </option>
+                </select>
+              </div>
+              
+              <div class="col-md-3">
+                <label class="filter-label">Statut de paiement</label>
+                <select class="form-select custom-select" [(ngModel)]="paymentModeFilter" (change)="applyFilters()">
+                  <option value="ALL">Tous les statuts</option>
+                  <option *ngFor="let mode of paymentModes" [value]="mode">
+                    {{ getPaymentStatusDisplay(mode) }}
+                  </option>
+                </select>
+              </div>
+              
+              <!-- Compteur et boutons -->
+              <div class="col-md-2 text-end">
+                <button class="btn custom-create-btn" (click)="createNewBill()">
+                  <span class="btn-icon"><i class="pe-7s-plus"></i></span>
+                  <span class="btn-text">Nouvelle facture</span>
+                </button>
+                
+                <!-- Lien vers l'historique des paiements -->
+                <a class="btn btn-info mt-2" routerLink="/admin/bill/payment-history">
+                  <i class="pe-7s-cash"></i> Historique des paiements
+                </a>
+              </div>
+            </div>
+            
+            <!-- Résumé des filtres et compteur -->
+            <div class="filter-summary mt-2">
+              <div class="applied-filters" *ngIf="statusFilter !== 'ALL' || paymentModeFilter !== 'ALL' || searchTerm">
+                <span class="filter-tag" *ngIf="statusFilter !== 'ALL'">
+                  Méthode: {{ getPaymentMethodDisplay(statusFilter) }}
+                  <i class="pe-7s-close" (click)="clearStatusFilter()"></i>
+                </span>
+                <span class="filter-tag" *ngIf="paymentModeFilter !== 'ALL'">
+                  Statut: {{ getPaymentStatusDisplay(paymentModeFilter) }}
+                  <i class="pe-7s-close" (click)="clearPaymentModeFilter()"></i>
+                </span>
+                <span class="filter-tag" *ngIf="searchTerm">
+                  Numéro: {{ searchTerm }}
+                  <i class="pe-7s-close" (click)="clearSearchTerm()"></i>
+                </span>
+                <button class="btn btn-sm btn-link" (click)="clearAllFilters()" *ngIf="statusFilter !== 'ALL' || paymentModeFilter !== 'ALL' || searchTerm">
+                  Effacer tous les filtres
+                </button>
+              </div>
+              <div class="results-count">
+                {{ filteredBills.length }} facture(s) trouvée(s)
+              </div>
+            </div>
+          </div>
+          
+          <div *ngIf="loading" class="text-center p-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Chargement...</span>
+            </div>
+          </div>
+
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+          </div>
+
+          <div class="table-responsive" *ngIf="!loading">
+            <table class="table">
+              <thead class="text-primary">
+                <tr>
+                  <th>Numéro</th>
+                  <th>Date</th>
+                  <th>Montant</th>
+                  <th>Méthode de paiement</th>
+                  <th>Statut</th>
+                  <th>Stock</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let bill of filteredBills">
+                  <td>{{ bill.num_Bill }}</td>
+                  <td>{{ bill.date | date: 'dd/MM/yyyy' }}</td>
+                  <td>{{ bill.total_Amount | currency:'EUR' }}</td>
+                  <td>
+                    <span [ngClass]="'badge ' + (bill.status === 'CASH' ? 'bg-success' : 
+                                               bill.status === 'TRANSFER' ? 'bg-info' : 
+                                               bill.status === 'CHECK' ? 'bg-warning' : 
+                                               bill.status === 'BANK_CARD' ? 'bg-primary' : 'bg-secondary')">
+                      {{ bill.status === 'CASH' ? 'Espèces' : 
+                         bill.status === 'TRANSFER' ? 'Virement' : 
+                         bill.status === 'CHECK' ? 'Chèque' : 
+                         bill.status === 'BANK_CARD' ? 'Carte bancaire' : bill.status }}
+                    </span>
+                  </td>
+                  <td>
+                    <span [ngClass]="'badge ' + (bill.paymentMode === 'PAID' ? 'bg-success' : 
+                                               bill.paymentMode === 'PENDING' ? 'bg-warning' : 
+                                               'bg-danger')">
+                      {{ bill.paymentMode === 'PAID' ? 'Payée' : 
+                         bill.paymentMode === 'PENDING' ? 'En attente' : 
+                         bill.paymentMode === 'CANCELLED' ? 'Annulée' : bill.paymentMode }}
+                    </span>
+                  </td>
+                  <td>
+                    <ng-container *ngIf="bill.stock && bill.stock.id_stock; else noStock">
+                      <span class="stock-name" [ngClass]="{'loading-indicator': !stocksMap.has(bill.stock.id_stock) || !stocksMap.get(bill.stock.id_stock)?.name}">
+                        {{ getStockName(bill) }}
+                      </span>
+                    </ng-container>
+                    <ng-template #noStock>
+                      <span class="stock-info not-associated">Non associé</span>
+                    </ng-template>
+                  </td>
+                  <td>
+                    <button class="btn btn-info btn-sm me-1" (click)="viewBill(bill.id_Bill)">
+                      <i class="pe-7s-look"></i>
+                    </button>
+                    <button class="btn btn-warning btn-sm me-1" (click)="editBill(bill.id_Bill)">
+                      <i class="pe-7s-pen"></i>
+                    </button>
+                    <button class="btn btn-danger btn-sm" (click)="deleteBill(bill.id_Bill)">
+                      <i class="pe-7s-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr *ngIf="filteredBills.length === 0">
+                  <td colspan="7" class="text-center">Aucune facture trouvée</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="filtered-etapes-container">
+  <div class="header">
+    <h2>Filtered Steps</h2>
+    <button routerLink="/tache" class="back-btn">
+      <i class="fas fa-arrow-left"></i> Back to Tasks
+    </button>
+  </div>
+
+  <div class="etapes-list">
+    <div *ngFor="let etape of etapes" class="etape-card">
+      <div class="etape-header">
+        <h3>{{ etape.nom }}</h3>
+        <span class="status-badge" [ngClass]="'status-' + etape.statut.toLowerCase()">
+          {{ etape.statut }}
+        </span>
+      </div>
+      <p class="description">{{ etape.description }}</p>
+      <div class="dates">
+        <span><i class="fas fa-calendar-start"></i> {{ etape.dateDebut | date:'short' }}</span>
+        <span><i class="fas fa-calendar-end"></i> {{ etape.dateFin | date:'short' }}</span>
+      </div>
+    </div>
+  </div>
+</div>

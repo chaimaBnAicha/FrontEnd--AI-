@@ -1,0 +1,111 @@
+:host ::ng-deep .fc {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 25px;
+    margin: 20px;
+}
+
+:host ::ng-deep .fc-header-toolbar {
+    margin-bottom: 2em;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+:host ::ng-deep .fc-toolbar-title {
+    font-size: 1.75em;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+:host ::ng-deep .fc-button-primary {
+    background-color: #3788d8;
+    border-color: #3788d8;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-weight: 500;
+    text-transform: capitalize;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+:host ::ng-deep .fc-button-primary:hover {
+    background-color: #2c6da8;
+    border-color: #2c6da8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+:host ::ng-deep .fc-button-primary:not(:disabled):active {
+    background-color: #1e4b7c;
+    transform: translateY(0);
+}
+
+:host ::ng-deep .fc-event {
+    cursor: pointer;
+}
+
+:host ::ng-deep .fc-event:hover {
+    opacity: 0.8;
+}
+
+:host ::ng-deep .fc-daygrid-event {
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 0.9em;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+:host ::ng-deep .fc-daygrid-event:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+:host ::ng-deep .fc-day-today {
+    background-color: rgba(55, 136, 216, 0.1) !important;
+}
+
+:host ::ng-deep .fc-daygrid-day-number {
+    color: #2c3e50;
+    font-weight: 600;
+    padding: 8px;
+}
+
+:host ::ng-deep .fc-daygrid-day {
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+:host ::ng-deep .fc-daygrid-day:hover {
+    background-color: rgba(55, 136, 216, 0.05);
+}
+
+:host ::ng-deep .fc-col-header {
+    background-color: #f8f9fa;
+    border-radius: 8px 8px 0 0;
+}
+
+:host ::ng-deep .fc-col-header-cell {
+    padding: 12px 0;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+:host ::ng-deep .fc-daygrid-day-events {
+    margin: 4px;
+}
+
+:host ::ng-deep .fc-daygrid-more-link {
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-weight: 500;
+    color: #3788d8;
+}
+
+:host ::ng-deep .fc-daygrid-more-link:hover {
+    background-color: #e9ecef;
+} 

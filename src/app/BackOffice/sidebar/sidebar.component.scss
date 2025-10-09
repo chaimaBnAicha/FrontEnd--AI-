@@ -1,0 +1,78 @@
+:host {
+    .sidebar {
+        background: white;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        
+        .logo {
+            padding: 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            
+            img {
+                height: 40px;
+            }
+        }
+
+        .nav {
+            margin-top: 20px;
+            
+            li {
+                margin: 10px 15px;
+                border-radius: 8px;
+                transition: all 0.3s;
+
+                &:hover, &.active {
+                    background: #fdbe33;
+                    
+                    a {
+                        color: white;
+                    }
+                }
+
+                a {
+                    color: #555;
+                    padding: 12px 15px;
+                    display: flex;
+                    align-items: center;
+                    text-decoration: none;
+                    
+                    i {
+                        font-size: 20px;
+                        margin-right: 10px;
+                    }
+
+                    p {
+                        margin: 0;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+
+        .sidebar-wrapper {
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+            
+            &::-webkit-scrollbar {
+                width: 6px;
+            }
+            
+            &::-webkit-scrollbar-thumb {
+                background: #fdbe33;
+                border-radius: 3px;
+            }
+        }
+    }
+}
+
+// Groupes de menu
+.menu-group {
+    margin-top: 20px;
+    
+    .group-title {
+        padding: 10px 15px;
+        color: #999;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+} 

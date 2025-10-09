@@ -1,0 +1,105 @@
+/* Style général du formulaire */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #f9d423, #ff4e50);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Style des labels */
+  form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #2c3e50;
+  }
+  
+  /* Style des champs de saisie */
+  form input[type="text"],
+  form input[type="number"],
+  form input[type="datetime-local"],
+  form textarea,
+  form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #3498db;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #34495e;
+    background-color: #ecf0f1;
+    transition: border-color 0.3s ease;
+  }
+  
+  form input[type="text"]:focus,
+  form input[type="number"]:focus,
+  form input[type="datetime-local"]:focus,
+  form textarea:focus,
+  form select:focus {
+    border-color: #2980b9;
+    outline: none;
+  }
+  
+  /* Style des messages d'erreur */
+  form div > div {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  /* Style des groupes de champs (projet et responsable) */
+  form div[formGroupName] {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style du bouton de soumission */
+  form button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  form button[type="submit"]:hover {
+    background: linear-gradient(135deg, #2980b9, #3498db);
+  }
+  
+  form button[type="submit"]:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+  }
+  
+  /* Style de l'affichage de l'état du formulaire */
+  form p {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #34495e;
+  }
+  
+  /* Style pour les sélecteurs (statut et priorité) */
+  form select {
+    appearance: none;
+    background: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%233498db%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")
+      no-repeat right 10px center/12px 12px;
+    padding-right: 30px;
+  }
+  
+  /* Style pour les textarea */
+  form textarea {
+    resize: vertical;
+    min-height: 100px;
+  }

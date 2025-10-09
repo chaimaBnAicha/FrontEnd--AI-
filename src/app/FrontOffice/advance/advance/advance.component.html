@@ -1,0 +1,305 @@
+<!-- Advances Table -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Builderz - Construction Company Website Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Construction Company Website Template" name="keywords">
+        <meta content="Construction Company Website Template" name="description">
+        <!-- Include jQuery (required for CounterUp) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include CounterUp -->
+<script src="https://cdn.rawgit.com/barskins/jquery-countTo/master/jquery.counterup.min.js"></script>
+
+
+        <!-- Favicon -->
+        <link href="assets/img/favicon.ico" rel="icon">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/src/assets/lib/flaticon/font/flaticon.css">
+        <link rel="stylesheet" href="/src/assets/lib/animate/animate.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/owlcarousel/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/lightbox/css/lightbox.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/slick/slick.css">
+        <link rel="stylesheet" href="/src/assets/lib/slick/slick-theme.css">
+        <link rel="stylesheet" href="/src/assets/css/style.css">
+    </head>
+
+    <body>
+        <div class="wrapper">
+             <!-- Top Bar Start -->
+             <div class="top-bar">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-lg-4 col-md-12">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <h1>Builderz</h1>
+                                    <!-- <img src="img/logo.jpg" alt="Logo"> -->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-7 d-none d-lg-block">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class="flaticon-calendar"></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Opening Hour</h3>
+                                            <p>Mon - Fri, 8:00 - 9:00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class="flaticon-call"></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Call Us</h3>
+                                            <p>+216 98 756 425</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class="flaticon-send-mail"></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Email Us</h3>
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Top Bar End -->
+
+            <!-- Nav Bar Start -->
+             
+            <div class="nav-bar" >
+                <div class="container-fluid">
+                    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+                        <a href="#" class="navbar-brand">MENU</a>
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                            <div class="navbar-nav mr-auto">
+                           
+
+
+ <a routerLink="/index" class="nav-item nav-link active">Home</a>
+
+<a routerLink="/about" class="nav-item nav-link">About</a>
+
+<a routerLink="/service" class="nav-item nav-link">Service</a>
+
+<a routerLink="/team" class="nav-item nav-link">Team</a>
+<a  routerLink="/portfolio" class="nav-item nav-link ">Project</a>
+<a routerLink="/advance" class="nav-item nav-link">Advance</a>
+<a routerLink="/leave" class="nav-item nav-link">Leave</a>
+
+
+                               
+                                
+                                
+                            </div>
+                          
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- Nav Bar End -->
+
+
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h4>My Advances</h4>
+            <button class="btn btn-light" routerLink="/add-advance">
+                <i class="fas fa-plus"></i> New Advance Request
+            </button>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-8">
+                    <div class="input-group shadow-sm">
+                        <input 
+                            type="text" 
+                            class="form-control"
+                            style="border-right: none;"
+                            placeholder="Search by amount or reason..." 
+                            [(ngModel)]="searchTerm"
+                            (keyup)="onSearch()">
+                        <div class="input-group-append" *ngIf="searchTerm">
+                            <button class="btn btn-outline-secondary border-left-0" 
+                                    (click)="clearSearch()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-control shadow-sm" 
+                            [(ngModel)]="statusFilter" 
+                            (change)="onStatusFilter()">
+                        <option value="">Filter by Status</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Amount</th>
+                            <th>Request Date</th>
+                            <th>Reason</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let advance of advances | paginate: { itemsPerPage: itemsPerPage, currentPage: p, totalItems: advances.length }">
+                            <td>{{ advance.amount_request | currency }}</td>
+                            <td>{{ advance.requestDate | date:'mediumDate' }}</td>
+                            <td [innerHTML]="advance.reason | safeHtml"></td>
+                            <td>
+                                <span class="badge" [ngClass]="{
+                                    'badge-warning': advance.status === 'Pending',
+                                    'badge-success': advance.status === 'Approved',
+                                    'badge-danger': advance.status === 'Rejected'
+                                }">
+                                    {{ advance.status }}
+                                </span>
+                            </td>
+                            <td>
+                                <button class="btn btn-info btn-sm mr-2" (click)="onEdit(advance)" 
+                                        [disabled]="advance.status !== 'Pending'">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm" (click)="onDelete(advance.id)"
+                                        [disabled]="advance.status !== 'Pending'">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr *ngIf="advances.length === 0">
+                            <td colspan="5" class="text-center">No advances found</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <div>
+                        <select class="form-control" [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange()">
+                            <option value="5">5 items</option>
+                            <option value="10">10 items</option>
+                            <option value="20">20 items</option>
+                        </select>
+                    </div>
+                    <pagination-controls
+                        (pageChange)="p = $event"
+                        previousLabel="Previous"
+                        nextLabel="Next"
+                        [responsive]="true"
+                        class="my-pagination">
+                    </pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ <!-- Footer Start -->
+ <div class="footer wow fadeIn" data-wow-delay="0.3s">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-3">
+                <div class="footer-contact">
+                    <h2>Office Contact</h2>
+                    <p><i class="fa fa-map-marker-alt"></i>123 Street, New York, USA</p>
+                    <p><i class="fa fa-phone-alt"></i>+012 345 67890</p>
+                  
+                    <div class="footer-social">
+                        <a href=""><i class="fab fa-twitter"></i></a>
+                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                        <a href=""><i class="fab fa-youtube"></i></a>
+                        <a href=""><i class="fab fa-instagram"></i></a>
+                        <a href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="footer-link">
+                    <h2>Services Areas</h2>
+                    <a href="">Building Construction</a>
+                    <a href="">House Renovation</a>
+                    <a href="">Architecture Design</a>
+                    <a href="">Interior Design</a>
+                    <a href="">Painting</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="footer-link">
+                    <h2>Useful Pages</h2>
+                    <a href="">About Us</a>
+                    <a href="">Contact Us</a>
+                    <a href="">Our Team</a>
+                    <a href="">Projects</a>
+                    <a href="">Testimonial</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="newsletter">
+                    <h2>Newsletter</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulpu
+                    </p>
+                    <div class="form">
+                        <input class="form-control" placeholder="Email here">
+                        <button class="btn">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container footer-menu">
+        <div class="f-menu">
+            <a href="">Terms of use</a>
+            <a href="">Privacy policy</a>
+            <a href="">Cookies</a>
+            <a href="">Help</a>
+            <a href="">FQAs</a>
+        </div>
+    </div>
+    <div class="container copyright">
+        <div class="row">
+            <div class="col-md-6">
+                <p>&copy; <a href="#">Your Site Name</a>, All Right Reserved.</p>
+            </div>
+            <div class="col-md-6">
+                <p>Designed By <a href="https://htmlcodex.com">HTML Codex</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+

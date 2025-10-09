@@ -1,0 +1,463 @@
+.payment-result-card {
+  margin-top: 50px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border: none;
+  overflow: hidden;
+}
+
+.payment-card {
+  margin-top: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.payment-form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 25px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.stripe-element-container {
+  min-height: 250px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+.success-icon, .error-icon {
+  font-size: 80px;
+  margin-bottom: 20px;
+}
+
+.success-icon {
+  color: #28a745;
+  
+  i {
+    background-color: rgba(76, 175, 80, 0.1);
+    padding: 30px;
+    border-radius: 50%;
+  }
+}
+
+.error-icon {
+  color: #dc3545;
+  
+  i {
+    background-color: rgba(244, 67, 54, 0.1);
+    padding: 30px;
+    border-radius: 50%;
+  }
+}
+
+#payment-element {
+  margin: 20px 0;
+  padding: 10px 0;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  background-color: #f9f9f9;
+  padding: 20px;
+  min-height: 100px;
+  margin-bottom: 24px;
+  padding: 12px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.placeholder-loading {
+  height: 200px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #f6f7f8;
+  border-radius: 4px;
+}
+
+.animated-background {
+  animation-duration: 1.5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: linear-gradient(to right, #f6f7f8 8%, #edeef1 18%, #f6f7f8 33%);
+  background-size: 800px 104px;
+  height: 100%;
+  position: relative;
+}
+
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.redirect-message {
+  font-style: italic;
+  color: #6c757d;
+  margin-top: 20px;
+}
+
+// Animation pour le chargement
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.loading-state {
+  .spinner-border {
+    width: 3rem;
+    height: 3rem;
+    animation: pulse 1.5s infinite;
+  }
+}
+
+// Styles pour des boutons plus attrayants
+.btn-primary {
+  background-color: #fdbe33;
+  border-color: #fdbe33;
+  font-weight: 600;
+  padding: 10px 24px;
+  letter-spacing: 0.5px;
+  
+  &:hover {
+    background-color: darken(#fdbe33, 10%);
+    border-color: darken(#fdbe33, 10%);
+  }
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  padding: 10px 25px;
+  font-weight: 600;
+  border-radius: 5px;
+  
+  &:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+  }
+}
+
+button {
+  padding: 10px 24px;
+  font-weight: 500;
+}
+
+button.btn-primary {
+  background-color: #fdbe33;
+  border-color: #fdbe33;
+  color: #000;
+  
+  &:hover, &:focus {
+    background-color: #e5a81d;
+    border-color: #e5a81d;
+    color: #000;
+  }
+}
+
+.d-none {
+  display: none !important;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.loading-animation {
+  animation: pulse 1.5s infinite;
+  background: #f6f7f8;
+  border-radius: 4px;
+  height: 100%;
+  min-height: 200px;
+}
+
+// Instructions de paiement
+.payment-instructions {
+  padding-left: 20px;
+  
+  li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+  
+  strong {
+    color: #333;
+  }
+}
+
+.payment-guide {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+// Conseils pour cartes de test
+.test-card-tips {
+  background-color: #f5f5f5;
+  border: 1px dashed #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.test-card-item {
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px dotted #eee;
+  
+  &:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  
+  .label {
+    font-weight: 600;
+    margin-right: 8px;
+    display: inline-block;
+    width: 100px;
+  }
+  
+  .value {
+    font-family: monospace;
+    background: #fffde7;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 13px;
+  }
+}
+
+// Amélioration du design des messages de succès
+.success-container {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.success-icon {
+  font-size: 100px;
+  color: #28a745;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+// Animations pour l'affichage du succès
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+  animation-delay: 0.3s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-icon.animated {
+  animation-name: scaleIn;
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// Toast notification
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.toast {
+  min-width: 300px;
+  background-color: #28a745;
+  color: white;
+  border-radius: 4px;
+  padding: 15px 20px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  animation: slideIn 0.5s ease forwards;
+}
+
+.toast-icon {
+  margin-right: 15px;
+  font-size: 24px;
+}
+
+.toast-content {
+  flex: 1;
+}
+
+.toast-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.toast.hide {
+  animation: slideOut 0.5s ease forwards;
+}
+
+// Notification de succès du paiement
+.payment-success-notification {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  width: 350px;
+  background-color: #ffffff;
+  border-left: 4px solid #28a745;
+  border-radius: 4px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: flex-start;
+  padding: 16px;
+  z-index: 1050;
+  animation: slideInRight 0.5s ease forwards, fadeOut 0.5s ease 10s forwards;
+  overflow: hidden;
+}
+
+.notification-icon {
+  font-size: 28px;
+  color: #28a745;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.notification-content {
+  flex: 1;
+  
+  h5 {
+    margin: 0 0 5px 0;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+  }
+}
+
+.notification-close {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 5px;
+  margin: -5px;
+  transition: color 0.2s;
+  
+  &:hover {
+    color: #555;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+// Progress bar pour la notification
+.notification-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background-color: #28a745;
+  width: 100%;
+  animation: shrinkProgress 10s linear forwards;
+}
+
+@keyframes shrinkProgress {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}

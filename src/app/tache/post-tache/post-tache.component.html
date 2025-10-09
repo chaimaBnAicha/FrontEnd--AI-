@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Builderz - Construction Company Website Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Construction Company Website Template" name="keywords">
+        <meta content="Construction Company Website Template" name="description">
+
+        <!-- Favicon -->
+        <link href="assets/img/favicon.ico" rel="icon">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/src/assets/lib/flaticon/font/flaticon.css">
+        <link rel="stylesheet" href="/src/assets/lib/animate/animate.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/owlcarousel/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/lightbox/css/lightbox.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/slick/slick.css">
+        <link rel="stylesheet" href="/src/assets/lib/slick/slick-theme.css">
+        <link rel="stylesheet" href="/src/assets/css/style.css">
+
+        
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <!-- Top Bar Start -->
+            <div class="top-bar">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-lg-4 col-md-12">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <h1>Builderz</h1>
+                                    <!-- <img src="img/logo.jpg" alt="Logo"> -->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-7 d-none d-lg-block">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class="flaticon-calendar"></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Opening Hour</h3>
+                                            <p>Mon - Fri, 8:00 - 9:00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class="flaticon-call"></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Call Us</h3>
+                                            <p>+012 345 6789</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class="flaticon-send-mail"></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Email Us</h3>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Top Bar End -->
+
+            <!-- Nav Bar Start -->
+            <div class="nav-bar">
+                <div class="container-fluid">
+                    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+                        <a href="#" class="navbar-brand">MENU</a>
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                            <div class="navbar-nav mr-auto">
+                                <a routerLink="/index" class="nav-item nav-link">Home</a>
+ 
+                                <a routerLink="/about" class="nav-item nav-link">About</a>
+                                <a routerLink="/blog" class="nav-item nav-link">Blog</a>
+                                <a routerLink="/service" class="nav-item nav-link">Service</a>
+                                <a routerLink="/single" class="nav-item nav-link">Single</a>
+                                <a routerLink="/team" class="nav-item nav-link">Team</a>
+                                <a routerLink="/tache" class="nav-item nav-link active">Task</a>
+                                <a  routerLink="/portfolio" class="nav-item nav-link ">Project</a>
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Pages</a>
+                                    <div class="dropdown-menu">
+                                        <a href="blog.html" class="dropdown-item">Blog Page</a>
+                                        <a href="single.html" class="dropdown-item">Single Page</a>
+                                    </div>
+                                </div>
+                                <a routerLink="/contact" class="nav-item nav-link">Contact</a>
+                            </div>
+                            <div class="ml-auto">
+                                <a class="btn" href="#">Get A Quote</a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- Nav Bar End -->
+            
+            
+            <!-- Page Header Start -->
+            <div class="page-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>Our Task</h2>
+                        </div>
+                        <div class="col-12">
+                            <a href="">Home</a>
+                            <a href="">Our Task</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Page Header End -->
+
+            <div class="container mt-4">
+              <div *ngIf="tache?.statut === 'EN_COURS'" class="d-flex justify-content-center">
+                <button 
+                  (click)="handleMarkAsDone()"
+                  [disabled]="isProcessing"
+                  class="btn btn-success btn-lg"
+                  style="min-width: 200px;">
+                  <span *ngIf="isProcessing" class="spinner-border spinner-border-sm me-2"></span>
+                  {{ isProcessing ? processingMessage : 'Marquer comme terminée' }}
+                </button>
+              </div>
+
+              <div *ngIf="isProcessing" class="alert alert-info mt-3 text-center">
+                <div class="d-flex align-items-center justify-content-center">
+                  <div class="spinner-border text-info me-2"></div>
+                  <strong>{{ processingMessage }}</strong>
+                </div>
+              </div>
+            </div>
+
+            <form [formGroup]="postTacheForm" (ngSubmit)="onSubmit()">
+              <!-- Nom -->
+              <div>
+                <label for="nom">Nom:</label>
+                <input type="text" formControlName="nom" id="nom" />
+                <div *ngIf="postTacheForm.get('nom')?.invalid && postTacheForm.get('nom')?.touched">
+                  <div *ngIf="postTacheForm.get('nom')?.errors?.['required']">Le nom est requis.</div>
+                  <div *ngIf="postTacheForm.get('nom')?.errors?.['minlength']">Le nom doit avoir au moins 3 caractères.</div>
+                </div>
+              </div>
+            
+              <!-- Description -->
+              <div>
+                <label for="description">Description:</label>
+                <textarea formControlName="description" id="description"></textarea>
+                <div *ngIf="postTacheForm.get('description')?.invalid && postTacheForm.get('description')?.touched">
+                  <div *ngIf="postTacheForm.get('description')?.errors?.['required']">La description est requise.</div>
+                  <div *ngIf="postTacheForm.get('description')?.errors?.['minlength']">La description doit avoir au moins 20 caractères.</div>
+                  <div *ngIf="postTacheForm.get('description')?.errors?.['maxlength']">La description ne peut pas dépasser 50 caractères.</div>
+                </div>
+              </div>
+            
+              <!-- Détails -->
+              <div>
+                <label for="details">Détails:</label>
+                <textarea formControlName="details" id="details"></textarea>
+                <div *ngIf="postTacheForm.get('details')?.invalid && postTacheForm.get('details')?.touched">
+                  <div *ngIf="postTacheForm.get('details')?.errors?.['required']">Les détails sont requis.</div>
+                  <div *ngIf="postTacheForm.get('details')?.errors?.['minlength']">Les détails doivent avoir au moins 20 caractères.</div>
+                  <div *ngIf="postTacheForm.get('details')?.errors?.['maxlength']">Les détails ne peuvent pas dépasser 200 caractères.</div>
+                </div>
+              </div>
+            
+              <!-- Durée Estimée -->
+              <div>
+                <label for="dureeEstimee">Durée Estimée (en jours):</label>
+                <input type="number" formControlName="dureeEstimee" id="dureeEstimee" />
+                <div *ngIf="postTacheForm.get('dureeEstimee')?.invalid && postTacheForm.get('dureeEstimee')?.touched">
+                  <div *ngIf="postTacheForm.get('dureeEstimee')?.errors?.['required']">La durée estimée est requise.</div>
+                  <div *ngIf="postTacheForm.get('dureeEstimee')?.errors?.['min']">La durée estimée doit être d'au moins 7 jours.</div>
+                </div>
+              </div>
+            
+              <!-- Statut -->
+              <div>
+                <label for="statut">Statut:</label>
+                <select formControlName="statut" id="statut">
+                  <option value="A_FAIRE">À faire</option>
+                  <option value="EN_COURS">En cours</option>
+                  <option value="TERMINE">Terminé</option>
+                </select>
+                <div *ngIf="postTacheForm.get('statut')?.invalid && postTacheForm.get('statut')?.touched">
+                  <div *ngIf="postTacheForm.get('statut')?.errors?.['required']">Le statut est requis.</div>
+                </div>
+              </div>
+            
+              <!-- Priorité -->
+              <div>
+                <label for="priorite">Priorité:</label>
+                <select formControlName="priorite" id="priorite">
+                  <option value="BASSE">Basse</option>
+                  <option value="MOYENNE">Moyenne</option>
+                  <option value="ELEVEE">Élevée</option>
+                </select>
+                <div *ngIf="postTacheForm.get('priorite')?.invalid && postTacheForm.get('priorite')?.touched">
+                  <div *ngIf="postTacheForm.get('priorite')?.errors?.['required']">La priorité est requise.</div>
+                </div>
+              </div>
+            
+              <!-- Date de Début -->
+              <div>
+                <label for="dateDebut">Date de Début:</label>
+                <input type="datetime-local" formControlName="dateDebut" id="dateDebut" />
+                <div *ngIf="postTacheForm.get('dateDebut')?.invalid && postTacheForm.get('dateDebut')?.touched">
+                  <div *ngIf="postTacheForm.get('dateDebut')?.errors?.['required']">La date de début est requise.</div>
+                  <div *ngIf="postTacheForm.get('dateDebut')?.errors?.['dateInvalide']">La date de début doit être après aujourd'hui.</div>
+                </div>
+              </div>
+            
+              <!-- Date de Fin -->
+              <div>
+                <label for="dateFin">Date de Fin:</label>
+                <input type="datetime-local" formControlName="dateFin" id="dateFin" />
+                <div *ngIf="postTacheForm.get('dateFin')?.invalid && postTacheForm.get('dateFin')?.touched">
+                  <div *ngIf="postTacheForm.get('dateFin')?.errors?.['required']">La date de fin est requise.</div>
+                  <div *ngIf="postTacheForm.get('dateFin')?.errors?.['dateFinInvalide']">La date de fin doit être au moins 1 jour après la date de début.</div>
+                </div>
+              </div>
+            
+              <!-- ID Projet -->
+              <div formGroupName="projet">
+                <label for="projetId">ID Projet:</label>
+                <input type="number" formControlName="id" id="projetId" />
+                <div *ngIf="postTacheForm.get('projet.id')?.invalid && postTacheForm.get('projet.id')?.touched">
+                  <div *ngIf="postTacheForm.get('projet.id')?.errors?.['required']">L'ID du projet est requis.</div>
+                  <div *ngIf="postTacheForm.get('projet.id')?.errors?.['pattern']">L'ID du projet doit être un nombre.</div>
+                </div>
+              </div>
+            
+              <!-- ID Responsable -->
+              <div formGroupName="responsable">
+                <label for="responsableId">ID Responsable:</label>
+                <input type="number" formControlName="id" id="responsableId" />
+                <div *ngIf="postTacheForm.get('responsable.id')?.invalid && postTacheForm.get('responsable.id')?.touched">
+                  <div *ngIf="postTacheForm.get('responsable.id')?.errors?.['required']">L'ID du responsable est requis.</div>
+                  <div *ngIf="postTacheForm.get('responsable.id')?.errors?.['pattern']">L'ID du responsable doit être un nombre.</div>
+                </div>
+              </div>
+            
+              <!-- Bouton de soumission -->
+              <button type="submit" [disabled]="postTacheForm.invalid">Soumettre</button>
+            </form>
+            
+<button class="btn-new" routerLink="/get-all-tache">All Task</button>
+
+<!-- Footer Start -->
+<div class="footer wow fadeIn" data-wow-delay="0.3s">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-6 col-lg-3">
+              <div class="footer-contact">
+                  <h2>Office Contact</h2>
+                  <p><i class="fa fa-map-marker-alt"></i>123 Street, New York, USA</p>
+                  <p><i class="fa fa-phone-alt"></i>+012 345 67890</p>
+                 
+                  <div class="footer-social">
+                      <a href=""><i class="fab fa-twitter"></i></a>
+                      <a href=""><i class="fab fa-facebook-f"></i></a>
+                      <a href=""><i class="fab fa-youtube"></i></a>
+                      <a href=""><i class="fab fa-instagram"></i></a>
+                      <a href=""><i class="fab fa-linkedin-in"></i></a>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+              <div class="footer-link">
+                  <h2>Services Areas</h2>
+                  <a href="">Building Construction</a>
+                  <a href="">House Renovation</a>
+                  <a href="">Architecture Design</a>
+                  <a href="">Interior Design</a>
+                  <a href="">Painting</a>
+              </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+              <div class="footer-link">
+                  <h2>Useful Pages</h2>
+                  <a href="">About Us</a>
+                  <a href="">Contact Us</a>
+                  <a href="">Our Team</a>
+                  <a href="">Projects</a>
+                  <a href="">Testimonial</a>
+              </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+              <div class="newsletter">
+                  <h2>Newsletter</h2>
+                  <p>
+                      Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulpu
+                  </p>
+                  <div class="form">
+                      <input class="form-control" placeholder="Email here">
+                      <button class="btn">Submit</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="container footer-menu">
+      <div class="f-menu">
+          <a href="">Terms of use</a>
+          <a href="">Privacy policy</a>
+          <a href="">Cookies</a>
+          <a href="">Help</a>
+          <a href="">FQAs</a>
+      </div>
+  </div>
+  <div class="container copyright">
+      <div class="row">
+          <div class="col-md-6">
+              <p>&copy; <a href="#">Your Site Name</a>, All Right Reserved.</p>
+          </div>
+          <div class="col-md-6">
+              <p>Designed By <a href="https://htmlcodex.com">HTML Codex</a></p>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- Footer End -->
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+</div>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="lib/isotope/isotope.pkgd.min.js"></script>
+<script src="lib/lightbox/js/lightbox.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/counterup/counterup.min.js"></script>
+<script src="lib/slick/slick.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
+
+<div *ngIf="tache?.statut === 'EN_COURS'" class="mt-3">
+  <button 
+    (click)="handleMarkAsDone()"
+    [disabled]="isProcessing"
+    class="btn btn-success"
+    style="min-width: 200px;">
+    <span *ngIf="isProcessing" class="spinner-border spinner-border-sm me-2"></span>
+    {{ isProcessing ? processingMessage : 'Marquer comme terminée' }}
+  </button>
+</div>
+
+<div *ngIf="isProcessing" class="alert alert-info mt-3">
+  <div class="d-flex align-items-center">
+    <div class="spinner-border text-info me-2"></div>
+    <strong>{{ processingMessage }}</strong>
+  </div>
+</div>
+</body>
+</html>

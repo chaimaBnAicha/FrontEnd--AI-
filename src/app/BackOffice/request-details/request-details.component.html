@@ -1,0 +1,140 @@
+<div class="container mt-4 request-details-container" #pdfContent>
+  <h2 class="text-center mb-4" style="color: #030f27;">Project Request - Details</h2>
+
+  <!-- User Information Section -->
+  <h3 class="section-title" style="color: #030f27; margin-bottom: 20px; font-weight: bold; border-bottom: 2px solid #fdbe33; padding-bottom: 10px;">
+    User Information
+  </h3>
+  <div *ngIf="userInfo" class="card card-user mb-4" style="border: none; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+    <div class="author">
+      <div class="avatar-container" style="width: 100px; height: 100px; border-radius: 50%; background-color: #fdbe33; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+        <span style="font-size: 40px; color: #030f27; font-weight: bold;">
+          {{ userInfo.firstName ? userInfo.firstName.charAt(0) : '' }}{{ userInfo.lastName ? userInfo.lastName.charAt(0) : '' }}
+        </span>
+      </div>
+      <h4 class="title" style="color: #030f27; margin-top: 10px;">
+        {{ userInfo.firstName }} {{ userInfo.last_name }}<br />
+        <small style="color: #fdbe33;">{{ userInfo.email }}</small>
+      </h4>
+    </div>
+    <form>
+      <div class="form-group text-left">
+        <label style="color: #030f27; font-weight: bold;">First Name</label>
+        <input type="text" class="form-control" value="{{ userInfo.firstName }}" readonly>
+      </div>
+      <div class="form-group text-left">
+        <label style="color: #030f27; font-weight: bold;">Last Name</label>
+        <input type="text" class="form-control" value="{{ userInfo.lastName }}" readonly>
+      </div>
+      <div class="form-group text-left">
+        <label style="color: #030f27; font-weight: bold;">Email</label>
+        <input type="email" class="form-control" value="{{ userInfo.email }}" readonly>
+      </div>
+      <div class="form-group text-left">
+        <label style="color: #030f27; font-weight: bold;">Phone</label>
+        <input type="text" class="form-control" value="{{ userInfo.phoneNumber }}" readonly>
+      </div>
+    </form>
+  </div>
+
+  <!-- Project Information Section -->
+  <h3 class="section-title" style="color: #030f27; margin-bottom: 20px; font-weight: bold; border-bottom: 2px solid #fdbe33; padding-bottom: 10px;">
+    Project Information
+  </h3>
+  <div *ngIf="requestDetails" class="card card-user mb-4">
+    <div class="author">
+      <div class="avatar-container" style="width: 100px; height: 100px; border-radius: 50%; background-color: #fdbe33; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+        <span style="font-size: 40px; color: #030f27; font-weight: bold;">
+          {{ requestDetails.projectName ? requestDetails.projectName.charAt(0) : '' }}
+        </span>
+      </div>
+      <h4 class="title" style="color: #030f27; margin-top: 10px;">
+        {{ requestDetails.projectName }}<br />
+        <small style="color: #fdbe33;">{{ requestDetails.projectType }}</small>
+      </h4>
+    </div>
+
+    <form>
+      <div class="form-group text-left">
+        <label style="color: #030f27; font-weight: bold;">Project Name</label>
+        <input type="text" class="form-control" value="{{ requestDetails.projectName }}" readonly>
+      </div>
+      <div class="form-group text-left">
+        <label style="color: #030f27; font-weight: bold;">Estimated Budget</label>
+        <input type="text" class="form-control" value="{{ requestDetails.estimated_budget }} TND" readonly>
+      </div>
+      <div class="form-group text-left">
+        <label style="color: #030f27; font-weight: bold;">Estimated Duration</label>
+        <input type="text" class="form-control" value="{{ requestDetails.estimated_duration }} months" readonly>
+      </div>
+
+    <!-- Description de la demande -->
+    <div>
+      <h3>Project Description</h3>
+      <p>{{ requestDetails.description }}</p>
+      
+      <!-- Icône d'analyse -->
+      <button (click)="showDescriptionAnalysis()" class="btn btn-info">
+        <span class="material-icons">analytics</span> Analyser la Description
+      </button>
+
+      <!-- Affichage des résultats d'analyse (modal) -->
+      <div *ngIf="isDescriptionModalVisible" class="modal">
+        <div class="modal-content">
+          <span class="close" (click)="closeDescriptionModal()">&times;</span>
+          <h4>Analyse de la description</h4>
+          <p>{{ analysisResult?.analysis }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="requestDetails?.geographic_location" id="map" class="mb-4" style="width: 100%; height: 400px; border-radius: 8px; overflow: hidden;"></div>
+
+    <div class="form-group text-left">
+      <label style="color: #030f27; font-weight: bold;">Location</label>
+      <input type="text" class="form-control" value="{{ requestDetails.geographic_location }}" readonly>
+    </div>
+  </form>
+  </div>
+
+  <div class="form-group mt-4">
+    <label style="color: #030f27; font-weight: bold;">Justification</label>
+    <div class="input-group">
+      <input type="text"
+             class="form-control"
+             placeholder="Enter your justification"
+             [(ngModel)]="justificationText"
+             [disabled]="isDisabled()">
+      <div class="input-group-append">
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="text-center">
+    <button (click)="updateStatus(requestDetails.id_projet, 'Approved')" class="btn mx-2" 
+    style="background-color: #fdbe33; color: #030f27; font-weight: bold;"
+    [disabled]="requestDetails?.status === 'Approved' || requestDetails?.status === 'Rejected'">
+    ✔ Approve
+  </button>
+  
+  <button (click)="updateStatus(requestDetails.id_projet, 'Rejected')" class="btn mx-2"
+    style="background-color: #030f27; color: #fff; font-weight: bold;"
+    [disabled]="requestDetails?.status === 'Approved' || requestDetails?.status === 'Rejected'">
+    ✖ Reject
+  </button>
+  
+
+    <button (click)="goBack()" class="btn mx-2"
+      style="background-color: #fff; color: #030f27; border: 1px solid #030f27; font-weight: bold;">
+      Back to List
+    </button>
+
+    <!-- Download PDF Button -->
+    <button (click)="downloadPDF()" class="btn mx-2"
+      style="background-color: #28a745; color: #fff; font-weight: bold;">
+      ⬇ Download PDF
+    </button>
+  </div>
+</div>

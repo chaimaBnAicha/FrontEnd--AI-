@@ -1,0 +1,45 @@
+.card {
+    border: 2px solid #fdbe33;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    background-color: #fdbe33 !important;
+    border: none;
+}
+
+.card-header h4 {
+    color: #030f27 !important;
+    font-weight: bold;
+    margin: 0;
+}
+
+.table thead th {
+    background-color: #030f27;
+    color: #fdbe33;
+    font-weight: 600;
+}
+
+.badge {
+    padding: 8px 12px;
+}
+
+.badge-warning {
+    background-color: #fdbe33;
+}
+
+.badge-success {
+    background-color: #28a745;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+}
+
+.btn-group .btn {
+    margin: 0 2px;
+}
+
+.my-pagination ::ng-deep .ngx-pagination .current {
+    background: #fdbe33;
+} 

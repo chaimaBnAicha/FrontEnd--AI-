@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Builderz - Construction Company Website Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Construction Company Website Template" name="keywords">
+        <meta content="Construction Company Website Template" name="description">
+
+        <!-- Favicon -->
+        <link href="assets/img/favicon.ico" rel="icon">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/src/assets/lib/flaticon/font/flaticon.css">
+        <link rel="stylesheet" href="/src/assets/lib/animate/animate.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/owlcarousel/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/lightbox/css/lightbox.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/slick/slick.css">
+        <link rel="stylesheet" href="/src/assets/lib/slick/slick-theme.css">
+        <link rel="stylesheet" href="/src/assets/css/style.css">
+
+        
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <!-- Top Bar Start -->
+            <div class="top-bar">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-lg-4 col-md-12">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <h1>Builderz</h1>
+                                    <!-- <img src="img/logo.jpg" alt="Logo"> -->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-7 d-none d-lg-block">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class="flaticon-calendar"></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Opening Hour</h3>
+                                            <p>Mon - Fri, 8:00 - 9:00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class="flaticon-call"></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Call Us</h3>
+                                            <p>+012 345 6789</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class="flaticon-send-mail"></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Email Us</h3>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Top Bar End -->
+
+            <!-- Nav Bar Start -->
+            <div class="nav-bar">
+                <div class="container-fluid">
+                    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+                        <a href="#" class="navbar-brand">MENU</a>
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                            <div class="navbar-nav mr-auto">
+                                <a routerLink="/index" class="nav-item nav-link">Home</a>
+ 
+                                <a routerLink="/about" class="nav-item nav-link">About</a>
+                                <a routerLink="/blog" class="nav-item nav-link">Blog</a>
+                                <a routerLink="/service" class="nav-item nav-link">Service</a>
+                                <a routerLink="/single" class="nav-item nav-link">Single</a>
+                                <a routerLink="/team" class="nav-item nav-link">Team</a>
+                                <a routerLink="/tache" class="nav-item nav-link active">Task</a>
+                                <a  routerLink="/portfolio" class="nav-item nav-link ">Project</a>
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Pages</a>
+                                    <div class="dropdown-menu">
+                                        <a href="blog.html" class="dropdown-item">Blog Page</a>
+                                        <a href="single.html" class="dropdown-item">Single Page</a>
+                                    </div>
+                                </div>
+                                <a routerLink="/contact" class="nav-item nav-link">Contact</a>
+                            </div>
+                            <div class="ml-auto">
+                                <a class="btn" href="#">Get A Quote</a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- Nav Bar End -->
+            
+            
+            <!-- Page Header Start -->
+            <div class="page-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>Our Task</h2>
+                        </div>
+                        <div class="col-12">
+                            <a href="">Home</a>
+                            <a href="">Our Task</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Page Header End -->
+
+<!-- ... keep the header part ... -->
+
+<div class="container mt-5 mb-5">
+  <div class="form-wrapper">
+      <h2 class="section-title">Add New Step</h2>
+      <form (ngSubmit)="onSubmit()" #etapeForm="ngForm" class="custom-form">
+          <div class="form-group">
+              <label for="task">Associated Task:</label>
+              <select id="task" [(ngModel)]="selectedTacheId" name="taskId" class="form-control custom-select" required>
+                  <option [ngValue]="0">Select a task</option>
+                  <option *ngFor="let tache of taches" [ngValue]="tache.id">
+                      {{tache.titre || tache.nom}}
+                  </option>
+              </select>
+          </div>
+
+          <div class="form-group">
+              <label for="name">Step Name:</label>
+              <input type="text" id="name" [(ngModel)]="etape.nom" name="name" 
+                     class="form-control" required placeholder="Enter step name">
+          </div>
+
+          <div class="form-group">
+              <label for="description">Description:</label>
+              <textarea id="description" [(ngModel)]="etape.description" name="description" 
+                       class="form-control" rows="4" required 
+                       placeholder="Enter step description"></textarea>
+          </div>
+
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="form-group">
+                      <label for="startDate">Start Date:</label>
+                      <input type="date" id="startDate" [(ngModel)]="etape.dateDebut" 
+                             name="startDate" class="form-control" required>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="form-group">
+                      <label for="endDate">End Date:</label>
+                      <input type="date" id="endDate" [(ngModel)]="etape.dateFin" 
+                             name="endDate" class="form-control" required>
+                  </div>
+              </div>
+          </div>
+
+          <div class="form-group">
+              <label for="status">Status:</label>
+              <select id="status" [(ngModel)]="etape.statut" name="status" 
+                      class="form-control custom-select" required>
+                  <option value="EN_COURS">In Progress</option>
+                  <option value="TERMINEE">Completed</option>
+                  <option value="A_FAIRE">To Do</option>
+              </select>
+          </div>
+           
+          <button type="submit" class="btn btn-primary submit-btn" 
+                  [disabled]="!selectedTacheId || !etapeForm.form.valid">
+              <i class="fas fa-plus-circle"  [routerLink]="['/etape/tache', selectedTacheId]"></i> Add Step
+          </button>
+          <button type="button" class="btn btn-secondary btn-lg px-4"  [routerLink]="['/etape/tache', selectedTacheId]">
+            <i class="fas fa-arrow-left me-2"></i>Back
+          </button>
+      </form>
+  </div>
+</div>
+
+<!-- Add this CSS in your component's CSS file -->
+<style>
+.form-wrapper {
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.section-title {
+  color: #030f27;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.section-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: #fdbe33;
+}
+
+.custom-form .form-group {
+  margin-bottom: 25px;
+}
+
+.custom-form label {
+  color: #030f27;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.custom-form .form-control {
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 12px 15px;
+  height: auto;
+  transition: all 0.3s;
+}
+
+.custom-form .form-control:focus {
+  border-color: #fdbe33;
+  box-shadow: 0 0 0 0.2rem rgba(253, 190, 51, 0.25);
+}
+
+.custom-select {
+  background-color: #fff;
+  color: #030f27;
+}
+
+.submit-btn {
+  background-color: #fdbe33;
+  border: none;
+  color: #030f27;
+  padding: 12px 30px;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: all 0.3s;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background-color: #030f27;
+  color: #fdbe33;
+}
+
+.submit-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.submit-btn i {
+  margin-right: 8px;
+}
+
+@media (max-width: 768px) {
+  .form-wrapper {
+      padding: 20px;
+  }
+}
+</style>
+
+<!-- ... keep the footer part ... -->
+<!-- Footer Start -->
+<div class="footer wow fadeIn" data-wow-delay="0.3s">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-6 col-lg-3">
+              <div class="footer-contact">
+                  <h2>Office Contact</h2>
+                  <p><i class="fa fa-map-marker-alt"></i>123 Street, New York, USA</p>
+                  <p><i class="fa fa-phone-alt"></i>+012 345 67890</p>
+                 
+                  <div class="footer-social">
+                      <a href=""><i class="fab fa-twitter"></i></a>
+                      <a href=""><i class="fab fa-facebook-f"></i></a>
+                      <a href=""><i class="fab fa-youtube"></i></a>
+                      <a href=""><i class="fab fa-instagram"></i></a>
+                      <a href=""><i class="fab fa-linkedin-in"></i></a>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+              <div class="footer-link">
+                  <h2>Services Areas</h2>
+                  <a href="">Building Construction</a>
+                  <a href="">House Renovation</a>
+                  <a href="">Architecture Design</a>
+                  <a href="">Interior Design</a>
+                  <a href="">Painting</a>
+              </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+              <div class="footer-link">
+                  <h2>Useful Pages</h2>
+                  <a href="">About Us</a>
+                  <a href="">Contact Us</a>
+                  <a href="">Our Team</a>
+                  <a href="">Projects</a>
+                  <a href="">Testimonial</a>
+              </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+              <div class="newsletter">
+                  <h2>Newsletter</h2>
+                  <p>
+                      Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulpu
+                  </p>
+                  <div class="form">
+                      <input class="form-control" placeholder="Email here">
+                      <button class="btn">Submit</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="container footer-menu">
+      <div class="f-menu">
+          <a href="">Terms of use</a>
+          <a href="">Privacy policy</a>
+          <a href="">Cookies</a>
+          <a href="">Help</a>
+          <a href="">FQAs</a>
+      </div>
+  </div>
+  <div class="container copyright">
+      <div class="row">
+          <div class="col-md-6">
+              <p>&copy; <a href="#">Your Site Name</a>, All Right Reserved.</p>
+          </div>
+          <div class="col-md-6">
+              <p>Designed By <a href="https://htmlcodex.com">HTML Codex</a></p>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- Footer End -->
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+</div>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="lib/isotope/isotope.pkgd.min.js"></script>
+<script src="lib/lightbox/js/lightbox.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/counterup/counterup.min.js"></script>
+<script src="lib/slick/slick.min.js"></script>
+

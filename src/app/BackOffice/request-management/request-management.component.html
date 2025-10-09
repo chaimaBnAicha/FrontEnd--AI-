@@ -1,0 +1,115 @@
+<div class="container">
+  <header class="dashboard-header">
+    <h1>Request Management</h1>
+    <div class="header-actions">
+      <div class="filters">
+        <label>Filter by status:</label>
+        <select [(ngModel)]="selectedStatus" (change)="filterByStatus()" class="status-filter">
+          <option value="">All Projects</option>
+          <option value="Pending">Pending</option>
+          <option value="Approved">Approved</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+
+    <!-- Section des statistiques -->
+    <div class="stats-grid">
+      <div class="stat-card pending">
+        <div class="stat-content">
+          <h3>Pending Projects</h3>
+          <div class="stat-main">
+            <span class="stat-number">{{ statistics?.pending }}</span>
+            <span class="stat-budget">{{ statistics?.totalPendingBudget | currency }}</span>
+          </div>
+          <div class="stat-trend">
+            <i class="fas fa-hourglass-half"></i>
+            <span>Awaiting review</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="stat-card approved">
+        <div class="stat-content">
+          <h3>Approved Projects</h3>
+          <div class="stat-main">
+            <span class="stat-number">{{ statistics?.approved }}</span>
+            <span class="stat-budget">{{ statistics?.totalApprovedBudget | currency }}</span>
+          </div>
+          <div class="stat-trend">
+            <i class="fas fa-check-circle"></i>
+            <span>Active projects</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="stat-card rejected">
+        <div class="stat-content">
+          <h3>Rejected Projects</h3>
+          <div class="stat-main">
+            <span class="stat-number">{{ statistics?.rejected }}</span>
+            <span class="stat-budget">{{ statistics?.totalRejectedBudget | currency }}</span>
+          </div>
+          <div class="stat-trend">
+            <i class="fas fa-times-circle"></i>
+            <span>Not approved</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+  <!-- Carte Google Maps -->
+  <div id="map" style="height: 400px; width: 100%; margin-bottom: 20px;"></div>
+
+  <!-- Tableau des demandes -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Project Name</th>
+        <th>Budget</th>
+        <th>Duration</th>
+        <th>Status</th>
+        <th>Recommendation</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let request of paginatedRequests">
+        <td>{{ request.id_projet }}</td>
+        
+        <td>{{ request.projectName }}</td>
+        <td>{{ request.estimated_budget }} $</td>
+        <td>{{ request.estimated_duration }}</td>
+        <td>
+          <span [ngStyle]="{'color': getStatusColor(request.status)}">{{ request.status }}</span>
+        </td>
+        <td>
+          <span [ngClass]="{
+            'text-green-600 font-bold': request.recommendationScore >= 0.8,
+            'text-yellow-600 font-medium': request.recommendationScore >= 0.5 && request.recommendationScore < 0.8,
+            'text-red-600 font-medium': request.recommendationScore < 0.5
+          }">
+            <i [class]="getRecommendationIcon(request.recommendationScore)" style="margin-right: 5px;"></i> 
+            {{ getRecommendationLabel(request.recommendationScore) }}
+          </span>
+        </td>
+        <td>
+          <button (click)="viewDetails(request.id_projet)" class="btn btn-info">View Details</button>
+          <button (click)="deleteRequest(request.id_projet)" class="btn btn-warning">🗑 Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  <div class="pagination-container">
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1" class="pagination-btn">❮ Previous</button>
+    <span class="pagination-info">Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage >= totalPages" class="pagination-btn">Next ❯</button>
+  </div>
+
+</div>

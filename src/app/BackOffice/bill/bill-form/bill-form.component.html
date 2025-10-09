@@ -1,0 +1,173 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">{{ isEditMode ? 'Modifier' : 'Créer' }} une facture</h4>
+        </div>
+        <div class="card-body">
+          <div *ngIf="loading" class="text-center p-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Chargement...</span>
+            </div>
+          </div>
+
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+          </div>
+
+          <form [formGroup]="billForm" (ngSubmit)="onSubmit()" *ngIf="!loading">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="num_Bill">Numéro de facture <span class="text-danger">*</span></label>
+                  <input
+                    type="text"
+                    id="num_Bill"
+                    formControlName="num_Bill"
+                    class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && hasError('num_Bill') }"
+                  />
+                  <div *ngIf="submitted && hasError('num_Bill')" class="invalid-feedback">
+                    <div *ngIf="hasError('num_Bill', 'required')">Le numéro de facture est requis</div>
+                    <div *ngIf="hasError('num_Bill', 'minlength')">Le numéro doit contenir au moins 3 caractères</div>
+                    <div *ngIf="hasError('num_Bill', 'pattern')">Le numéro ne doit contenir que des lettres, chiffres, espaces, tirets et underscores</div>
+                  </div>
+                  <small class="form-text text-muted">Format: lettres, chiffres, tirets, underscores (min 3 caractères)</small>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="date">Date <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <input
+                      type="date"
+                      id="date"
+                      formControlName="date"
+                      class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && (hasError('date') || errorMessage?.includes('Date')) }"
+                    />
+                    <div class="input-group-append">
+                      <span class="input-group-text">
+                        <i class="pe-7s-date"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <div *ngIf="submitted && hasError('date')" class="invalid-feedback">
+                    <div *ngIf="hasError('date', 'required')">La date est requise</div>
+                  </div>
+                  <small class="form-text text-muted">
+                    Format: JJ/MM/AAAA - Utilisez une date récente ou future
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="total_Amount">Montant total <span class="text-danger">*</span></label>
+                  <input
+                    type="number"
+                    id="total_Amount"
+                    formControlName="total_Amount"
+                    class="form-control"
+                    step="0.01"
+                    min="0.01"
+                    [ngClass]="{ 'is-invalid': submitted && hasError('total_Amount') }"
+                  />
+                  <div *ngIf="submitted && hasError('total_Amount')" class="invalid-feedback">
+                    <div *ngIf="hasError('total_Amount', 'required')">Le montant total est requis</div>
+                    <div *ngIf="hasError('total_Amount', 'min')">Le montant total doit être supérieur à 0</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="stock">Stock</label>
+                  <ng-container formGroupName="stock">
+                    <select
+                      id="stock"
+                      formControlName="id_stock"
+                      class="form-control"
+                    >
+                      <option [ngValue]="null">-- Sélectionner un stock --</option>
+                      <option *ngFor="let stock of stocks" [ngValue]="stock.id_stock">
+                        Stock #{{ stock.id_stock }} - {{ stock.name || '' }}
+                      </option>
+                    </select>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="status">Méthode de paiement <span class="text-danger">*</span></label>
+                  <select
+                    id="status"
+                    formControlName="status"
+                    class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && hasError('status') }"
+                  >
+                    <option value="">-- Sélectionner une méthode de paiement --</option>
+                    <option *ngFor="let statusOption of statuses" [value]="statusOption">
+                      {{ statusOption === 'CASH' ? 'Espèces' : 
+                         statusOption === 'TRANSFER' ? 'Virement' : 
+                         statusOption === 'CHECK' ? 'Chèque' : 
+                         statusOption === 'BANK_CARD' ? 'Carte bancaire' : statusOption }}
+                    </option>
+                  </select>
+                  <div *ngIf="submitted && hasError('status')" class="invalid-feedback">
+                    <div *ngIf="hasError('status', 'required')">La méthode de paiement est requise</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="paymentMode">Statut de paiement <span class="text-danger">*</span></label>
+                  <select
+                    id="paymentMode"
+                    formControlName="paymentMode"
+                    class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && hasError('paymentMode') }"
+                  >
+                    <option value="">-- Sélectionner un statut de paiement --</option>
+                    <option *ngFor="let mode of paymentModes" [value]="mode">
+                      {{ mode === 'PAID' ? 'Payée' : 
+                         mode === 'PENDING' ? 'En attente' : 
+                         mode === 'CANCELLED' ? 'Annulée' : mode }}
+                    </option>
+                  </select>
+                  <div *ngIf="submitted && hasError('paymentMode')" class="invalid-feedback">
+                    <div *ngIf="hasError('paymentMode', 'required')">Le statut de paiement est requis</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-4">
+              <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-primary me-2" [disabled]="loading">
+                  <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+                  {{ isEditMode ? 'Mettre à jour' : 'Créer' }} la facture
+                </button>
+                <button type="button" class="btn btn-secondary" routerLink="/admin/bill">
+                  Annuler
+                </button>
+              </div>
+            </div>
+            
+            <div class="mt-3">
+              <p class="text-muted"><span class="text-danger">*</span> Champs obligatoires</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

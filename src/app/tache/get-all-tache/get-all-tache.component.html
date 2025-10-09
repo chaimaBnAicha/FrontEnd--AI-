@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Builderz - Construction Company Website Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Construction Company Website Template" name="keywords">
+        <meta content="Construction Company Website Template" name="description">
+
+        <!-- Favicon -->
+        <link href="assets/img/favicon.ico" rel="icon">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/src/assets/lib/flaticon/font/flaticon.css">
+        <link rel="stylesheet" href="/src/assets/lib/animate/animate.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/owlcarousel/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/lightbox/css/lightbox.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/slick/slick.css">
+        <link rel="stylesheet" href="/src/assets/lib/slick/slick-theme.css">
+        <link rel="stylesheet" href="/src/assets/css/style.css">
+
+        
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <!-- Top Bar Start -->
+            <div class="top-bar">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-lg-4 col-md-12">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <h1>Builderz</h1>
+                                    <!-- <img src="img/logo.jpg" alt="Logo"> -->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-7 d-none d-lg-block">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class="flaticon-calendar"></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Opening Hour</h3>
+                                            <p>Mon - Fri, 8:00 - 9:00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class="flaticon-call"></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Call Us</h3>
+                                            <p>+012 345 6789</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class="flaticon-send-mail"></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Email Us</h3>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Top Bar End -->
+
+            <!-- Nav Bar Start -->
+            <div class="nav-bar">
+                <div class="container-fluid">
+                    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+                        <a href="#" class="navbar-brand">MENU</a>
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                            <div class="navbar-nav mr-auto">
+                                <a routerLink="/index" class="nav-item nav-link">Home</a>
+ 
+                                <a routerLink="/about" class="nav-item nav-link">About</a>
+                                <a routerLink="/blog" class="nav-item nav-link">Blog</a>
+                                <a routerLink="/service" class="nav-item nav-link">Service</a>
+                                <a routerLink="/single" class="nav-item nav-link">Single</a>
+                                <a routerLink="/team" class="nav-item nav-link">Team</a>
+                                <a routerLink="/tache" class="nav-item nav-link active">Task</a>
+                                <a  routerLink="/portfolio" class="nav-item nav-link ">Project</a>
+                              
+                                <a routerLink="/contact" class="nav-item nav-link">Contact</a>
+                            </div>
+                            <div class="ml-auto">
+                                <a class="btn" href="#">Get A Quote</a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- Nav Bar End -->
+            
+            
+           
+
+<!-- Page Header Start -->
+<div class="page-header">
+  <div class="container">
+      <div class="row">
+          <div class="col-12">
+              <h2>Our Tasks</h2>
+          </div>
+          <div class="col-12">
+              <a routerLink="/index">Home</a>
+              <a>Our Tasks</a>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Action Header -->
+<div class="action-header">
+  <button class="btn-new" routerLink="/tache">
+      <i class="fas fa-plus-circle me-2"></i>
+      Create New Task
+  </button>
+  <button class="btn-new" routerLink="/kanban">
+      <i class="fas fa-columns me-2"></i>
+      Kanban View
+  </button>
+  <div class="search-container">
+      <div class="search-input-wrapper">
+          <input type="text" 
+                 [formControl]="searchControl"
+                 placeholder="Search by name, description, status, assignee..."
+                 class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <div class="search-spinner" *ngIf="isSearching">
+              <i class="fas fa-spinner fa-spin"></i>
+          </div>
+      </div>
+      <div class="search-status" *ngIf="noResults">
+          <p><i class="fas fa-info-circle me-2"></i>No results found</p>
+      </div>
+  </div>
+</div>
+
+<!-- Tasks Table -->
+<div class="tasks-container">
+  <div class="table-responsive">
+      <table class="tasks-table">
+          <thead>
+              <tr>
+                  <th>Task Name</th>
+                  <th>Description</th>
+                  <th>Status</th>
+                  <th>Priority</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Project</th>
+                  <th>Assignee</th>
+                  <th>Actions</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let tache of displayedTaches">
+                  <td>{{ tache.nom || tache.titre }}</td>
+                  <td>
+                      {{ tache.description }}
+                      <button class="action-btn" (click)="analyzeDescription(tache)">
+                          <i class="fas fa-robot"></i>
+                      </button>
+                  </td>
+                  <td>
+                      <span class="status-badge status-{{tache.statut}}">
+                          {{ tache.statut }}
+                      </span>
+                  </td>
+                  <td>
+                      <span class="priority-badge priority-{{tache.priorite}}">
+                          {{ tache.priorite }}
+                      </span>
+                  </td>
+                  <td>{{ tache.dateDebut | date:'short' }}</td>
+                  <td>{{ tache.dateFin | date:'short' }}</td>
+                  <td>Project #{{ tache.projet.id }}</td>
+                  <td>User #{{ tache.responsable.id }}</td>
+                  <td>
+                      <div class="action-buttons">
+                        <button [routerLink]="['/etape/tache', tache.id]" class="action-btn steps-btn">
+                          <i class="fas fa-tasks"></i>
+                      </button>
+                          <button routerLink="/tache/{{tache.id}}" class="action-btn edit-btn">
+                              <i class="fas fa-edit"></i>
+                          </button>
+                          <button (click)="confirmDelete(tache.id)" class="action-btn delete-btn">
+                              <i class="fas fa-trash"></i>
+                          </button>
+                          <button (click)="generatePDF(tache)" class="action-btn pdf-btn">
+                              <i class="fas fa-file-pdf"></i>
+                          </button>
+                          <button (click)="createMeeting(tache)" class="action-btn meet-btn" title="Create Google Meet">
+                            <i class="fas fa-video"></i>
+                          </button>
+  
+                      
+
+<!-- Add this style -->
+<style>
+.meet-btn {
+  background: #34A853;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.meet-btn:hover {
+  background: #2E7D32;
+}
+</style>
+                      </div>
+                  </td>
+                  
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</div>
+<div class="modal-overlay" *ngIf="selectedTacheId" (click)="closeEtapesModal()">
+  <div class="steps-modal" (click)="$event.stopPropagation()">
+      <button class="close-modal" (click)="closeEtapesModal()">
+          <i class="fas fa-times"></i>
+      </button>
+      <div class="modal-header">
+          <h3>
+              <i class="fas fa-tasks"></i>
+              Étapes de la tâche : {{selectedTacheName}}
+          </h3>
+      </div>
+      <div class="modal-content">
+          <div class="etapes-container" *ngIf="etapes.length > 0">
+              <div class="etape-card" *ngFor="let etape of etapes">
+                  <div class="etape-header">
+                      <h4>{{etape.titre}}</h4>
+                      <span class="etape-status" [ngClass]="{
+                          'status-completed': etape.status === 'COMPLETED',
+                          'status-in-progress': etape.status === 'IN_PROGRESS',
+                          'status-todo': etape.status === 'TODO'
+                      }">
+                          {{etape.status}}
+                      </span>
+                  </div>
+                  <div class="etape-body">
+                      <p>{{etape.description}}</p>
+                  </div>
+              </div>
+          </div>
+          <div class="no-etapes" *ngIf="etapes.length === 0">
+              <i class="fas fa-info-circle"></i>
+              <p>Aucune étape n'est associée à cette tâche</p>
+          </div>
+      </div>
+  </div>
+</div>
+
+<style>
+/* ... existing styles ... */
+
+.steps-btn {
+  background: #fdbe33;
+  color: #030f27;
+  transition: all 0.3s ease;
+}
+
+.steps-btn:hover {
+  background: #030f27;
+  color: #fdbe33;
+}
+
+.etapes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.etape-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 15px;
+  border: 1px solid #eee;
+}
+
+.etape-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.etape-header h4 {
+  margin: 0;
+  color: #030f27;
+}
+
+.etape-status {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.status-completed {
+  background: #28a745;
+  color: white;
+}
+
+.status-in-progress {
+  background: #ffc107;
+  color: #000;
+}
+
+.status-todo {
+  background: #dc3545;
+  color: white;
+}
+
+.etape-body {
+  color: #666;
+}
+
+.no-etapes {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.no-etapes i {
+  font-size: 2rem;
+  color: #fdbe33;
+  margin-bottom: 10px;
+}
+</style>
+<!-- Pagination -->
+<div class="pagination-container">
+  <div class="pagination">
+      <button class="page-btn" (click)="goToPreviousPage()" [disabled]="currentPage === 1">
+          <i class="fas fa-chevron-left"></i>
+      </button>
+      <span class="page-info">Page {{ currentPage }} of {{ totalPages }}</span>
+      <button class="page-btn" (click)="goToNextPage()" [disabled]="currentPage === totalPages">
+          <i class="fas fa-chevron-right"></i>
+      </button>
+  </div>
+</div>
+
+<!-- Steps Modal -->
+<div class="modal-overlay" *ngIf="selectedTacheId" (click)="selectedTacheId = null">
+  <div class="steps-modal" (click)="$event.stopPropagation()">
+      <button class="close-modal" (click)="selectedTacheId = null">
+          <i class="fas fa-times"></i>
+      </button>
+      <div class="modal-header">
+          <h3>
+              <i class="fas fa-tasks"></i>
+              Steps for Task: {{selectedTacheName}}
+          </h3>
+      </div>
+      <div class="modal-content">
+          <app-list-etape [tacheId]="selectedTacheId"></app-list-etape>
+      </div>
+  </div>
+</div>
+
+<!-- Analysis Modal -->
+<div class="modal-overlay" *ngIf="taskAnalysis" (click)="closeAnalysis()">
+  <div class="analysis-modal" (click)="$event.stopPropagation()">
+      <button class="close-modal" (click)="closeAnalysis()">
+          <i class="fas fa-times"></i>
+      </button>
+      <div class="modal-header">
+          <h3>Task Analysis</h3>
+      </div>
+      <div class="modal-content">
+          <!-- Analysis content here -->
+      </div>
+  </div>
+</div>
+
+<style>
+/* Essential styles only */
+.action-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin: 20px;
+}
+
+.btn-new {
+  background: #fdbe33;
+  color: #030f27;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-new:hover {
+  background: #030f27;
+  color: #fdbe33;
+}
+
+.search-container {
+  flex-grow: 1;
+  max-width: 600px;
+  margin-left: 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 40px;
+  border: 2px solid #ddd;
+  border-radius: 25px;
+}
+
+.tasks-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: white;
+}
+
+.tasks-table th {
+  background: #030f27;
+  color: white;
+  padding: 15px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn {
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.steps-btn { background: #fdbe33; color: #030f27; }
+.edit-btn { background: #007bff; color: white; }
+.delete-btn { background: #dc3545; color: white; }
+.pdf-btn { background: #17a2b8; color: white; }
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.steps-modal {
+  background: white;
+  width: 95%;
+  max-width: 1400px;
+  height: 90vh;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  padding: 20px;
+  border-bottom: 2px solid #fdbe33;
+  background: #030f27;
+  border-radius: 20px 20px 0 0;
+}
+
+.modal-header h3 {
+  color: white;
+  margin: 0;
+}
+
+.modal-content {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.close-modal {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #fdbe33;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+</style>
+
+  <!-- Footer Start -->
+<div class="footer wow fadeIn" data-wow-delay="0.3s">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-6 col-lg-3">
+              <div class="footer-contact">
+                  <h2>Office Contact</h2>
+                  <p><i class="fa fa-map-marker-alt"></i>123 Street, New York, USA</p>
+                  <p><i class="fa fa-phone-alt"></i>+012 345 67890</p>
+                 
+                  <div class="footer-social">
+                      <a href=""><i class="fab fa-twitter"></i></a>
+                      <a href=""><i class="fab fa-facebook-f"></i></a>
+                      <a href=""><i class="fab fa-youtube"></i></a>
+                      <a href=""><i class="fab fa-instagram"></i></a>
+                      <a href=""><i class="fab fa-linkedin-in"></i></a>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+              <div class="footer-link">
+                  <h2>Services Areas</h2>
+                  <a href="">Building Construction</a>
+                  <a href="">House Renovation</a>
+                  <a href="">Architecture Design</a>
+                  <a href="">Interior Design</a>
+                  <a href="">Painting</a>
+              </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+              <div class="footer-link">
+                  <h2>Useful Pages</h2>
+                  <a href="">About Us</a>
+                  <a href="">Contact Us</a>
+                  <a href="">Our Team</a>
+                  <a href="">Projects</a>
+                  <a href="">Testimonial</a>
+              </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+              <div class="newsletter">
+                  <h2>Newsletter</h2>
+                  <p>
+                      Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulpu
+                  </p>
+                  <div class="form">
+                      <input class="form-control" placeholder="Email here">
+                      <button class="btn">Submit</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="container footer-menu">
+      <div class="f-menu">
+          <a href="">Terms of use</a>
+          <a href="">Privacy policy</a>
+          <a href="">Cookies</a>
+          <a href="">Help</a>
+          <a href="">FQAs</a>
+      </div>
+  </div>
+  <div class="container copyright">
+      <div class="row">
+          <div class="col-md-6">
+              <p>&copy; <a href="#">Your Site Name</a>, All Right Reserved.</p>
+          </div>
+          <div class="col-md-6">
+              <p>Designed By <a href="https://htmlcodex.com">HTML Codex</a></p>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- Footer End -->
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+</div>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="lib/isotope/isotope.pkgd.min.js"></script>
+<script src="lib/lightbox/js/lightbox.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/counterup/counterup.min.js"></script>
+<script src="lib/slick/slick.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
+
+<style>
+.search-container {
+    margin: 20px 0;
+    position: relative;
+}
+
+.search-input-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 40px 12px 40px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0,123,255,0.25);
+    outline: none;
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.search-spinner {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #007bff;
+}
+
+.search-status {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 3px;
+}
+
+.icon-button:hover {
+    transform: translateY(-2px);
+}
+
+.icon-button.delete:hover {
+    color: #dc3545;
+}
+
+.icon-button.pdf {
+    color: #e74c3c;
+}
+
+.icon-button.pdf:hover {
+    color: #c0392b;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.icon-button.pdf:active {
+    animation: pulse 0.3s ease-in-out;
+}
+</style>
+
+<div class="analysis-results" *ngIf="taskAnalysis">
+  <h3>Analyse de la tâche</h3>
+  
+  <!-- Étapes détectées -->
+  <div class="analysis-section">
+    <h4>Étapes détectées ({{ taskAnalysis.steps.length }})</h4>
+    <ul class="steps-list">
+      <li *ngFor="let step of taskAnalysis.steps">
+        {{ step }}
+      </li>
+    </ul>
+    <p *ngIf="taskAnalysis.steps.length === 0">
+      Aucune étape détectée. Essayez d'utiliser des marqueurs comme "1.", "-", ou "étape".
+    </p>
+  </div>
+
+  <!-- Complexité et durée -->
+  <div class="analysis-section">
+    <h4>Évaluation</h4>
+    <p class="complexity">
+      Complexité: 
+      <span [ngClass]="taskAnalysis.complexity.toLowerCase()">
+        {{ taskAnalysis.complexity }}
+      </span>
+    </p>
+    <p class="duration">
+      Durée estimée: {{ taskAnalysis.estimatedDuration }} heures
+    </p>
+  </div>
+
+  <!-- Mots-clés techniques -->
+  <div class="analysis-section">
+    <h4>Mots-clés techniques détectés</h4>
+    <div class="keywords">
+      <span class="keyword" *ngFor="let keyword of taskAnalysis.keywords">
+        {{ keyword }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Suggestions -->
+  <div class="analysis-section">
+    <h4>Suggestions</h4>
+    <ul class="suggestions-list">
+      <li *ngFor="let suggestion of taskAnalysis.suggestions">
+        {{ suggestion }}
+      </li>
+    </ul>
+  </div>
+</div>
+
+<style>
+.task-analysis-container {
+  margin: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+
+.analyze-btn {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8em;
+  margin-left: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.analyze-btn:hover {
+  background-color: #5a6268;
+}
+
+.analysis-results {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.analysis-section {
+  margin-bottom: 20px;
+}
+
+.analysis-section h4 {
+  color: #495057;
+  margin-bottom: 10px;
+}
+
+.steps-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.steps-list li {
+  padding: 8px;
+  margin-bottom: 5px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.complexity {
+  font-weight: bold;
+}
+
+.complexity span {
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.complexity .simple { background-color: #28a745; color: white; }
+.complexity .moyenne { background-color: #ffc107; color: black; }
+.complexity .complexe { background-color: #dc3545; color: white; }
+
+.keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.keyword {
+  background-color: #e9ecef;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.suggestions-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.suggestions-list li {
+  padding: 8px;
+  margin-bottom: 5px;
+  border-left: 3px solid #007bff;
+  background-color: #f8f9fa;
+}
+</style>
+
+<!-- Ajouter un modal pour l'analyse -->
+<div class="modal-overlay" *ngIf="taskAnalysis" (click)="closeAnalysis()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Analyse de la Tâche</h3>
+      <button class="close-btn" (click)="closeAnalysis()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <!-- Résumé rapide -->
+      <div class="quick-summary">
+        <div class="summary-item">
+          <i class="fas fa-list"></i>
+          <span>{{ taskAnalysis.steps.length }} étapes</span>
+        </div>
+        <div class="summary-item">
+          <i class="fas fa-clock"></i>
+          <span>{{ taskAnalysis.estimatedDuration }}h estimées</span>
+        </div>
+        <div class="summary-item">
+          <i class="fas fa-chart-line"></i>
+          <span class="complexity-badge" [ngClass]="taskAnalysis.complexity.toLowerCase()">
+            {{ taskAnalysis.complexity }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Étapes détectées -->
+      <div class="analysis-section">
+        <h4><i class="fas fa-tasks"></i> Étapes détectées</h4>
+        <div class="steps-container">
+          <div class="step-item" *ngFor="let step of taskAnalysis.steps; let i = index">
+            <span class="step-number">{{ i + 1 }}</span>
+            <span class="step-text">{{ step }}</span>
+          </div>
+          <p *ngIf="taskAnalysis.steps.length === 0" class="no-steps">
+            <i class="fas fa-info-circle"></i>
+            Aucune étape détectée. Essayez d'utiliser des marqueurs comme "1.", "-", ou "étape".
+          </p>
+        </div>
+      </div>
+
+      <!-- Mots-clés techniques -->
+      <div class="analysis-section">
+        <h4><i class="fas fa-tags"></i> Mots-clés techniques</h4>
+        <div class="keywords-container">
+          <span class="keyword-tag" *ngFor="let keyword of taskAnalysis.keywords">
+            <i class="fas fa-code"></i> {{ keyword }}
+          </span>
+          <p *ngIf="taskAnalysis.keywords.length === 0" class="no-keywords">
+            Aucun mot-clé technique détecté
+          </p>
+        </div>
+      </div>
+
+      <!-- Suggestions -->
+      <div class="analysis-section">
+        <h4><i class="fas fa-lightbulb"></i> Suggestions</h4>
+        <div class="suggestions-container">
+          <div class="suggestion-item" *ngFor="let suggestion of taskAnalysis.suggestions">
+            {{ suggestion }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Styles pour le modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #666;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+/* Résumé rapide */
+.quick-summary {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.summary-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.complexity-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.simple { background-color: #28a745; color: white; }
+.moyenne { background-color: #ffc107; color: black; }
+.complexe { background-color: #dc3545; color: white; }
+
+/* Sections d'analyse */
+.analysis-section {
+  margin-bottom: 30px;
+}
+
+.analysis-section h4 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+/* Étapes */
+.steps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  transition: transform 0.2s;
+}
+
+.step-item:hover {
+  transform: translateX(5px);
+}
+
+.step-number {
+  background: #007bff;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* Mots-clés */
+.keywords-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.keyword-tag {
+  background: #e9ecef;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9em;
+}
+
+/* Suggestions */
+.suggestions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.suggestion-item {
+  padding: 10px 15px;
+  background: #f8f9fa;
+  border-left: 4px solid #007bff;
+  border-radius: 4px;
+}
+
+/* Messages d'absence de données */
+.no-steps, .no-keywords {
+  color: #6c757d;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+</style>
+</body>
+</html>

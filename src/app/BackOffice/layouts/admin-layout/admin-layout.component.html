@@ -1,0 +1,81 @@
+<div class="wrapper">
+  <div class="sidebar" data-color="" data-image="">
+      <app-sidebar></app-sidebar>
+      <div class="sidebar-background" style="background-image: url(assets/img/background_sidebar.jpg)"></div>
+  </div>
+
+  <div class="main-panel">
+      <nav class="navbar navbar-expand-lg modern-navbar">
+          <div class="container-fluid px-4">
+              <!-- Logo ou titre -->
+              <div class="navbar-brand d-flex align-items-center">
+                  <i class="pe-7s-home me-2"></i>
+                  <span class="brand-text">BackOffice</span>
+              </div>
+
+              <!-- Bouton toggle pour mobile -->
+              <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                  <i class="pe-7s-menu"></i>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarContent">
+                  <!-- Barre de recherche -->
+                  <form class="d-flex mx-auto search-form">
+                      <div class="input-group">
+                          <span class="input-group-text border-0 bg-transparent">
+                              <i class="pe-7s-search"></i>
+                          </span>
+                          <input class="form-control border-0 shadow-none" type="search" placeholder="Rechercher...">
+                      </div>
+                  </form>
+
+                  <!-- Actions rapides -->
+                  <ul class="navbar-nav align-items-center">
+                      <!-- Notifications -->
+                      <li class="nav-item dropdown me-3">
+                          <a class="nav-link p-0 position-relative" href="#" role="button" data-bs-toggle="dropdown">
+                              <i class="pe-7s-bell notification-icon"></i>
+                              <span class="notification-badge">3</span>
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-end notification-dropdown">
+                              <h6 class="dropdown-header">Notifications</h6>
+                              <div class="notification-item">
+                                  <i class="pe-7s-note2 text-primary me-2"></i>
+                                  <div class="notification-content">
+                                      <p class="mb-0">Nouvelle tâche assignée</p>
+                                      <small class="text-muted">Il y a 5 minutes</small>
+                                  </div>
+                              </div>
+                              <div class="notification-item">
+                                  <i class="pe-7s-mail text-success me-2"></i>
+                                  <div class="notification-content">
+                                      <p class="mb-0">Nouveau message</p>
+                                      <small class="text-muted">Il y a 15 minutes</small>
+                                  </div>
+                              </div>
+                              <div class="notification-item">
+                                  <i class="pe-7s-refresh text-warning me-2"></i>
+                                  <div class="notification-content">
+                                      <p class="mb-0">Mise à jour du projet</p>
+                                      <small class="text-muted">Il y a 30 minutes</small>
+                                  </div>
+                              </div>
+                              <a class="dropdown-item text-center view-all" href="#">
+                                  Voir toutes les notifications
+                              </a>
+                          </div>
+                      </li>
+
+                      
+                  </ul>
+              </div>
+          </div>
+      </nav>
+
+      <router-outlet></router-outlet>
+      <div *ngIf="isMap('maps')">
+          <footer-cmp></footer-cmp>
+      </div>
+  </div>
+
+</div>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Builderz - Construction Company Website Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Construction Company Website Template" name="keywords">
+        <meta content="Construction Company Website Template" name="description">
+
+        <!-- Favicon -->
+        <link href="assets/img/favicon.ico" rel="icon">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/src/assets/lib/flaticon/font/flaticon.css">
+        <link rel="stylesheet" href="/src/assets/lib/animate/animate.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/owlcarousel/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/lightbox/css/lightbox.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/slick/slick.css">
+        <link rel="stylesheet" href="/src/assets/lib/slick/slick-theme.css">
+        <link rel="stylesheet" href="/src/assets/css/style.css">
+
+        
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <!-- Top Bar Start -->
+            <div class="top-bar">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-lg-4 col-md-12">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <h1>Builderz</h1>
+                                    <!-- <img src="img/logo.jpg" alt="Logo"> -->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-7 d-none d-lg-block">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class="flaticon-calendar"></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Opening Hour</h3>
+                                            <p>Mon - Fri, 8:00 - 9:00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class="flaticon-call"></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Call Us</h3>
+                                            <p>+012 345 6789</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class="flaticon-send-mail"></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Email Us</h3>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Top Bar End -->
+
+            <!-- Nav Bar Start -->
+            <div class="nav-bar">
+                <div class="container-fluid">
+                    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+                        <a href="#" class="navbar-brand">MENU</a>
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                            <div class="navbar-nav mr-auto">
+                                <a routerLink="/index" class="nav-item nav-link">Home</a>
+ 
+                                <a routerLink="/about" class="nav-item nav-link">About</a>
+                                <a routerLink="/blog" class="nav-item nav-link">Blog</a>
+                                <a routerLink="/service" class="nav-item nav-link">Service</a>
+                                <a routerLink="/single" class="nav-item nav-link">Single</a>
+                                <a routerLink="/team" class="nav-item nav-link">Team</a>
+                                <a routerLink="/tache" class="nav-item nav-link active">Task</a>
+                                <a  routerLink="/portfolio" class="nav-item nav-link ">Project</a>
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Pages</a>
+                                    <div class="dropdown-menu">
+                                        <a href="blog.html" class="dropdown-item">Blog Page</a>
+                                        <a href="single.html" class="dropdown-item">Single Page</a>
+                                    </div>
+                                </div>
+                                <a routerLink="/contact" class="nav-item nav-link">Contact</a>
+                            </div>
+                            <div class="ml-auto">
+                                <a class="btn" href="#">Get A Quote</a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- Nav Bar End -->
+            
+            
+            <!-- Page Header Start -->
+            <div class="page-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>Our Task</h2>
+                        </div>
+                        <div class="col-12">
+                            <a href="">Home</a>
+                            <a href="">Our Task</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Page Header End -->
+
+<!-- Form Section Start -->
+<div class="container mt-5">
+  <div class="form-wrapper">
+    <h2 class="section-title">Edit Step</h2>
+    <form (ngSubmit)="onSubmit()" #etapeForm="ngForm" class="custom-form">
+      <div class="form-group">
+        <label for="task">Associated Task:</label>
+        <select id="task" [(ngModel)]="selectedTacheId" name="taskId" class="form-control custom-select" required>
+          <option [ngValue]="0">Select a task</option>
+          <option *ngFor="let tache of taches" [ngValue]="tache.id">
+            {{tache.titre || tache.nom}}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Step Name:</label>
+        <input type="text" id="name" [(ngModel)]="etape.nom" name="name" 
+               class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" [(ngModel)]="etape.description" name="description" 
+                 class="form-control custom-textarea" rows="4" required></textarea>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" [(ngModel)]="etape.dateDebut" 
+                   name="startDate" class="form-control" required>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" [(ngModel)]="etape.dateFin" 
+                   name="endDate" class="form-control" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="status">Status:</label>
+        <select id="status" [(ngModel)]="etape.statut" name="status" class="form-control custom-select" required>
+          <option value="EN_COURS">In Progress</option>
+          <option value="TERMINEE">Completed</option>
+          <option value="A_FAIRE">To Do</option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn custom-btn" [disabled]="!etapeForm.form.valid">
+          Update Step
+        </button>
+        <button type="button" class="btn btn-secondary ml-2" routerLink="/etape/list">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+.form-wrapper {
+  background: #ffffff;
+  padding: 45px;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.1);
+  margin-bottom: 45px;
+}
+
+.section-title {
+  position: relative;
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+  color: #030f27;
+}
+
+.section-title::after {
+  position: absolute;
+  content: "";
+  width: 60px;
+  height: 3px;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  background: #fdbe33;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  color: #030f27;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.form-control {
+  height: 45px;
+  border: 1px solid #dddddd;
+  border-radius: 0;
+  color: #454545;
+  padding: 10px 15px;
+}
+
+.custom-textarea {
+  height: auto;
+  min-height: 120px;
+}
+
+.custom-select {
+  height: 45px;
+  border-radius: 0;
+}
+
+.form-control:focus {
+  border-color: #fdbe33;
+  box-shadow: none;
+}
+
+.custom-btn {
+  background: #fdbe33;
+  color: #030f27;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 0;
+  font-weight: 600;
+  transition: .3s;
+}
+
+.custom-btn:hover {
+  background: #030f27;
+  color: #fdbe33;
+}
+
+.btn-secondary {
+  background: #030f27;
+  border: none;
+  border-radius: 0;
+  padding: 12px 30px;
+  font-weight: 600;
+}
+
+.btn-secondary:hover {
+  background: #fdbe33;
+  color: #030f27;
+}
+
+.form-actions {
+  margin-top: 35px;
+  text-align: center;
+}
+</style>
+
+<!-- ... keep the footer part ... -->
+<!-- Footer Start -->
+<div class="footer wow fadeIn" data-wow-delay="0.3s">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-6 col-lg-3">
+              <div class="footer-contact">
+                  <h2>Office Contact</h2>
+                  <p><i class="fa fa-map-marker-alt"></i>123 Street, New York, USA</p>
+                  <p><i class="fa fa-phone-alt"></i>+012 345 67890</p>
+                 
+                  <div class="footer-social">
+                      <a href=""><i class="fab fa-twitter"></i></a>
+                      <a href=""><i class="fab fa-facebook-f"></i></a>
+                      <a href=""><i class="fab fa-youtube"></i></a>
+                      <a href=""><i class="fab fa-instagram"></i></a>
+                      <a href=""><i class="fab fa-linkedin-in"></i></a>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+              <div class="footer-link">
+                  <h2>Services Areas</h2>
+                  <a href="">Building Construction</a>
+                  <a href="">House Renovation</a>
+                  <a href="">Architecture Design</a>
+                  <a href="">Interior Design</a>
+                  <a href="">Painting</a>
+              </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+              <div class="footer-link">
+                  <h2>Useful Pages</h2>
+                  <a href="">About Us</a>
+                  <a href="">Contact Us</a>
+                  <a href="">Our Team</a>
+                  <a href="">Projects</a>
+                  <a href="">Testimonial</a>
+              </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+              <div class="newsletter">
+                  <h2>Newsletter</h2>
+                  <p>
+                      Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulpu
+                  </p>
+                  <div class="form">
+                      <input class="form-control" placeholder="Email here">
+                      <button class="btn">Submit</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="container footer-menu">
+      <div class="f-menu">
+          <a href="">Terms of use</a>
+          <a href="">Privacy policy</a>
+          <a href="">Cookies</a>
+          <a href="">Help</a>
+          <a href="">FQAs</a>
+      </div>
+  </div>
+  <div class="container copyright">
+      <div class="row">
+          <div class="col-md-6">
+              <p>&copy; <a href="#">Your Site Name</a>, All Right Reserved.</p>
+          </div>
+          <div class="col-md-6">
+              <p>Designed By <a href="https://htmlcodex.com">HTML Codex</a></p>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- Footer End -->
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+</div>

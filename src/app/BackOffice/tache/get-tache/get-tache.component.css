@@ -1,0 +1,256 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #ff9800;
+    color: white;
+    font-weight: bold;
+  }
+  
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Style pour les statuts */
+  td[data-statut="À faire"] {
+    color: #ff9800; /* Orange */
+  }
+  
+  td[data-statut="En cours"] {
+    color: #ff9800; /* Bleu */
+  }
+  
+  td[data-statut="Terminé"] {
+    color: #4caf50; /* Vert */
+  }
+  
+  /* Style pour les priorités */
+  td[data-priorite="Basse"] {
+    color: #4caf50; /* Vert */
+  }
+  
+  td[data-priorite="Moyenne"] {
+    color: #ff9800; /* Orange */
+  }
+  
+  td[data-priorite="Élevée"] {
+    color: #ff9800; /* Rouge */
+  }/* styles.css */
+.custom-dialog-container .mat-dialog-container {
+    padding: 0;
+    border-radius: 15px;
+    overflow: hidden;
+    background: transparent;
+  }
+  .btn-new {
+    background-color: #ff9800; /* Couleur de fond verte */
+    color: white; /* Texte en blanc */
+    font-size: 16px; /* Taille de police */
+    padding: 10px 20px; /* Espacement intérieur */
+    border-radius: 8px; /* Coins arrondis */
+    border: none; /* Supprimer les bordures par défaut */
+    cursor: pointer; /* Changer le curseur au survol */
+    transition: all 0.3s ease; /* Transition fluide lors des interactions */
+  }
+  
+  .btn-new:hover {
+    background-color: #ff9800; /* Couleur de fond lors du survol */
+    transform: scale(1.05); /* Agrandir légèrement au survol */
+  }
+  
+  .btn-new:active {
+    background-color: #ff9800; /* Couleur au clic */
+    transform: scale(1); /* Rétablir la taille normale */
+  }
+  
+  .icon-button {
+    background-color: transparent; /* Pas de fond */
+    border: none; /* Pas de bordure */
+    padding: 10px; /* Un peu de padding autour de l'icône */
+    cursor: pointer; /* Changer le curseur au survol */
+    transition: all 0.3s ease; /* Transition fluide */
+  }
+  
+  .icon-button i {
+    font-size: 16px; /* Taille de l'icône */
+  }
+  
+  .icon-button:hover {
+    transform: scale(1.1); /* Agrandir légèrement au survol */
+  }
+  
+  /* Icône de modification (update) en vert */
+  .icon-button .fa-edit {
+    color: #28a745; /* Couleur verte */
+  }
+  
+  /* Icône de suppression (delete) en rouge */
+  .icon-button .fa-trash {
+    color: #dc3545; /* Couleur rouge */
+  }
+  
+  /* Changer la couleur lors du survol */
+  .icon-button .fa-edit:hover {
+    color: #218838; /* Une teinte plus foncée de vert au survol */
+  }
+  
+  .icon-button .fa-trash:hover {
+    color: #c82333; /* Une teinte plus foncée de rouge au survol */
+  }
+
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    background-color: transparent;
+    border: 2px solid #218838;
+    color: #218838;
+    padding: 8px;
+    font-size: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .pagination button:hover {
+    background-color: #218838;
+    color: white;
+  }
+  
+  .pagination button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  
+  .pagination i {
+    font-size: 10px;
+  }
+  
+  .search-container {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f5f5f5;
+    border-radius: 8px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #2196F3;
+    box-shadow: 0 0 8px rgba(33, 150, 243, 0.3);
+}
+
+.results-container {
+    margin-top: 20px;
+}
+
+.tache-card {
+    background: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.tache-card:hover {
+    transform: translateY(-2px);
+}
+
+.metadata {
+    margin-top: 10px;
+    display: flex;
+    gap: 15px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.statut {
+    color: #2196F3;
+    font-weight: 500;
+}
+/* Styles pour le modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0 8px;
+  }
+  
+  .modal-body p {
+    margin: 10px 0;
+    line-height: 1.6;
+  }

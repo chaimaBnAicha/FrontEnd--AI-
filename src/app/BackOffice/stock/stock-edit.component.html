@@ -1,0 +1,74 @@
+<!-- Top Bar Start -->
+<div class="top-bar">
+    // ... copier la même top-bar que dans stock.component.html ...
+</div>
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Edit Stock Item</h4>
+                    </div>
+                    <div class="card-body">
+                        <form (ngSubmit)="updateStock()">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input type="text" 
+                                               class="form-control" 
+                                               [(ngModel)]="editingStock.name" 
+                                               name="editName">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Quantity</label>
+                                        <input type="number" 
+                                               class="form-control" 
+                                               [(ngModel)]="editingStock.quantity" 
+                                               name="editQuantity">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Price</label>
+                                        <input type="number" 
+                                               class="form-control" 
+                                               [(ngModel)]="editingStock.unitPrice" 
+                                               name="editPrice">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Category</label>
+                                        <select class="form-control" 
+                                                [(ngModel)]="editingStock.category" 
+                                                name="editCategory">
+                                            <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-success">
+                                        Update Stock
+                                    </button>
+                                    <button type="button" class="btn btn-secondary ml-2" routerLink="/stock">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Start -->
+// ... copier le même footer que dans stock.component.html ...

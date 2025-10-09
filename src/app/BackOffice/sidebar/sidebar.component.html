@@ -1,0 +1,25 @@
+<div class="sidebar-wrapper">
+    <div class="logo">
+        <a href="#" class="simple-text">
+            <img src="assets/img/Picture1 (2).png"  width=80% height="8%" alt="logo">
+        </a>
+    </div>
+    
+    <ul class="nav">
+        <ng-container *ngFor="let groupName of objectKeys(menuItems)">
+            <div class="menu-group">
+                <div class="group-title">
+                    {{menuGroups[groupName]}}
+                </div>
+                <li *ngFor="let menuItem of menuItems[groupName]" 
+                    routerLinkActive="active" 
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <a [routerLink]="[menuItem.path]">
+                        <i [class]="menuItem.icon"></i>
+                        <p>{{menuItem.title}}</p>
+                    </a>
+                </li>
+            </div>
+        </ng-container>
+    </ul>
+</div>

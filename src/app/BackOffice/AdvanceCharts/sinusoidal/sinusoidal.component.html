@@ -1,0 +1,8 @@
+<div *ngIf="sinusoidalChartData.datasets[0]?.data?.length">
+    <canvas baseChart
+      [data]="sinusoidalChartData"
+      [options]="sinusoidalChartOptions"
+      [type]="sinusoidalChartType">
+    </canvas>
+  </div>
+  

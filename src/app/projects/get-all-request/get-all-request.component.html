@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Builderz - Construction Company Website Template</title>
+    
+    <!-- Favicon -->
+    <link href="assets/img/favicon.ico" rel="icon">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/src/assets/lib/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="/src/assets/lib/animate/animate.min.css">
+    <link rel="stylesheet" href="/src/assets/lib/owlcarousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/src/assets/lib/lightbox/css/lightbox.min.css">
+    <link rel="stylesheet" href="/src/assets/lib/slick/slick.css">
+    <link rel="stylesheet" href="/src/assets/lib/slick/slick-theme.css">
+    <link rel="stylesheet" href="/src/assets/css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Top Bar Start -->
+        <div class="top-bar">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-md-12">
+                        <div class="logo">
+                            <a href="index.html">
+                                <h1>Builderz</h1>
+                                <!-- <img src="img/logo.jpg" alt="Logo"> -->
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-7 d-none d-lg-block">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="top-bar-item">
+                                    <div class="top-bar-icon">
+                                        <i class="flaticon-calendar"></i>
+                                    </div>
+                                    <div class="top-bar-text">
+                                        <h3>Opening Hour</h3>
+                                        <p>Mon - Fri, 8:00 - 9:00</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="top-bar-item">
+                                    <div class="top-bar-icon">
+                                        <i class="flaticon-call"></i>
+                                    </div>
+                                    <div class="top-bar-text">
+                                        <h3>Call Us</h3>
+                                        <p>+216 98 756 425</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="top-bar-item">
+                                    <div class="top-bar-icon">
+                                        <i class="flaticon-send-mail"></i>
+                                    </div>
+                                    <div class="top-bar-text">
+                                        <h3>Email Us</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Top Bar End -->
+
+        <!-- Nav Bar Start -->
+        <div class="nav-bar">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+                    <a href="#" class="navbar-brand">MENU</a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto">
+                            <a routerLink="/index" class="nav-item nav-link">Home</a>
+                            <a routerLink="/about" class="nav-item nav-link">About</a>
+                            <a routerLink="/service" class="nav-item nav-link">Service</a>
+                            <a routerLink="/team" class="nav-item nav-link">Team</a>
+                            <a routerLink="/portfolio" class="nav-item nav-link">Project</a>
+                            <a routerLink="/request" class="nav-item nav-link">Add Request</a>
+                            <a routerLink="/all-request" class="nav-item nav-link active">View Request</a>
+                            <a routerLink="/contact" class="nav-item nav-link">Contact</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Nav Bar End -->
+
+        <!-- Liste des Requêtes -->
+        <div class="container my-5">
+            <h2 class="mb-4 text-center section-title">List of Requests</h2>
+            <div class="text-right mb-3">
+                <a routerLink="/request" class="btn btn-primary btn-add-request">
+                    Add a New Request
+                </a>
+            </div>
+           <!-- Barre de recherche -->
+           <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search requests..." [(ngModel)]="searchText" (input)="filterRequests()">
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Description</th>
+                        <th>Budget (€)</th>
+                        <th>Duration (months)</th>
+                        <th>Location</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let request of  paginatedRequests" class="table-row">
+                        <td>{{ request.projectName }}</td>
+                        <td>{{ request.description }}</td>
+                        <td>{{ request.estimated_budget | currency:'EUR' }}</td>
+                        <td>{{ request.estimated_duration }}</td>
+                        <td>{{ request.geographic_location }}</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm btn-cancel" (click)="deleteRequest(request.id_projet)">Cancel Request</button>
+                        </td>
+                    </tr>
+                </tbody>
+                <!-- Pagination -->
+
+            </table>
+            
+        </div>
+        <nav *ngIf="totalPages.length > 1" class="mt-3">
+            <ul class="pagination justify-content-center">
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <button class="page-link" (click)="setPage(currentPage - 1)">Previous</button>
+              </li>
+              <li 
+                class="page-item" 
+                *ngFor="let page of totalPages" 
+                [class.active]="currentPage === page">
+                <button class="page-link" (click)="setPage(page)">{{ page }}</button>
+              </li>
+              <li class="page-item" [class.disabled]="currentPage === totalPages.length">
+                <button class="page-link" (click)="setPage(currentPage + 1)">Next</button>
+              </li>
+            </ul>
+          </nav>
+        <ng-template #noRequests>
+            <p class="text-center text-muted no-requests">No requests found.</p>
+        </ng-template>
+    </div>
+    </div>
+
+    <!-- Custom CSS -->
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #030f27;
+            background-color: #f8f9fa;
+        }
+
+       
+
+        /* Section Title */
+        .section-title {
+            color: #030f27;
+            font-family: 'Poppins', sans-serif;
+            border-bottom: 2px solid #fdbe33;
+            display: inline-block;
+            padding-bottom: 10px;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        /* Buttons */
+        .btn-add-request {
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            background-color: #fdbe33;
+            border-color: #fdbe33;
+            color: #030f27;
+        }
+
+        .btn-add-request:hover {
+            background-color: #030f27;
+            border-color: #030f27;
+            color: #fdbe33;
+        }
+
+        .btn-cancel {
+            border-radius: 15px;
+            padding: 5px 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-cancel:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+
+        /* Table Styles */
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1rem;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .table thead th {
+            background-color: #030f27;
+            color: #fdbe33;
+            font-weight: 600;
+            padding: 12px;
+        }
+
+        .table tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .table-row:hover {
+            background-color: #f2f2f2;
+            transition: background-color 0.3s ease;
+        }
+
+        /* No Requests Message */
+        .no-requests {
+            font-size: 18px;
+            font-family: 'Poppins', sans-serif;
+            color: #6c757d;
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include CounterUp -->
+<script src="https://cdn.rawgit.com/barskins/jquery-countTo/master/jquery.counterup.min.js"></script>
+
+
+        <!-- Favicon -->
+        <link href="assets/img/favicon.ico" rel="icon">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/src/assets/lib/flaticon/font/flaticon.css">
+        <link rel="stylesheet" href="/src/assets/lib/animate/animate.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/owlcarousel/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/lightbox/css/lightbox.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/slick/slick.css">
+        <link rel="stylesheet" href="/src/assets/lib/slick/slick-theme.css">
+        <link rel="stylesheet" href="/src/assets/css/style.css">
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h4>All Leave Requests</h4>
+            <a routerLink="/admin/leave-calendar" class="btn btn-light">
+                <i class="fas fa-calendar-alt"></i> View Calendar
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-8">
+                    <div class="input-group shadow-sm">
+                        <input 
+                            type="text" 
+                            class="form-control"
+                            placeholder="Search by reason or type..." 
+                            [(ngModel)]="searchTerm"
+                            (keyup)="onSearch()">
+                        <div class="input-group-append" *ngIf="searchTerm">
+                            <button class="btn btn-outline-secondary" (click)="clearSearch()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-control shadow-sm" 
+                            [(ngModel)]="statusFilter" 
+                            (change)="onStatusFilter()">
+                        <option value="">All Statuses</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Type</th>
+                            <th>Reason</th>
+                            <th>Document</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let leave of leaves | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+                            <td>{{ leave.start_date | date:'mediumDate' }}</td>
+                            <td>{{ leave.end_date | date:'mediumDate' }}</td>
+                            <td>{{ leave.type }}</td>
+                            <td [innerHTML]="leave.reason | safeHtml"></td>
+                            <td>
+                                <div *ngIf="leave.documentAttachement">
+                                    <button class="btn btn-primary btn-sm" 
+                                            (click)="downloadDocument(leave)"
+                                            [disabled]="leave.isDownloading">
+                                        <i class="fas" [ngClass]="{'fa-download': !leave.isDownloading, 'fa-spinner fa-spin': leave.isDownloading}"></i>
+                                        {{leave.isDownloading ? 'Downloading...' : ''}}
+                                    </button>
+                                </div>
+                                <div *ngIf="leave.downloadError" class="text-danger small mt-1">
+                                    Failed to download document
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge" [ngClass]="{
+                                    'badge-warning': leave.status === 'Pending',
+                                    'badge-success': leave.status === 'Approved',
+                                    'badge-danger': leave.status === 'Rejected'
+                                }">
+                                    {{ leave.status }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-success btn-sm" 
+                                            (click)="updateStatus(leave, LeaveStatus.APPROVED)"
+                                            [disabled]="leave.status === LeaveStatus.APPROVED || leave.status === LeaveStatus.REJECTED || !canAccept(leave) || isLoading(leave)">
+                                        <i class="fas" [ngClass]="{'fa-check': !isLoading(leave), 'fa-spinner fa-spin': isLoading(leave)}"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" 
+                                            (click)="updateStatus(leave, LeaveStatus.REJECTED)"
+                                            [disabled]="leave.status === LeaveStatus.REJECTED || leave.status === LeaveStatus.APPROVED || canAccept(leave)">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <div>
+                        <select class="form-control" [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange()">
+                            <option value="5">5 items</option>
+                            <option value="10">10 items</option>
+                            <option value="20">20 items</option>
+                        </select>
+                    </div>
+                    <pagination-controls
+                        (pageChange)="p = $event"
+                        class="my-pagination">
+                    </pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

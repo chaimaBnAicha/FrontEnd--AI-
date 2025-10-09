@@ -1,0 +1,228 @@
+// Styles pour les filtres
+.filters-section {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+// Styles pour les cartes de statistiques
+.stats-section {
+  margin-bottom: 30px;
+
+  .stat-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .stat-card-body {
+      padding: 20px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .stat-card-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: rgba(253, 190, 51, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      
+      i {
+        font-size: 28px;
+        color: #fdbe33;
+      }
+    }
+    
+    .stat-card-info {
+      flex: 1;
+      
+      .stat-card-title {
+        font-size: 14px;
+        color: #777;
+        margin-bottom: 5px;
+      }
+      
+      .stat-card-value {
+        font-size: 24px;
+        font-weight: 600;
+        color: #333;
+      }
+    }
+  }
+}
+
+// Styles pour le tableau 
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  
+  thead {
+    background-color: #f8f9fa;
+    
+    th {
+      padding: 15px;
+      border-bottom: 2px solid #e9ecef;
+      font-weight: 600;
+      color: #495057;
+    }
+  }
+  
+  tbody {
+    tr {
+      transition: background-color 0.2s;
+      
+      &:hover {
+        background-color: rgba(253, 190, 51, 0.05);
+      }
+      
+      td {
+        padding: 15px;
+        vertical-align: middle;
+        border-bottom: 1px solid #e9ecef;
+      }
+    }
+  }
+  
+  .payment-id {
+    font-family: monospace;
+    background-color: #f8f9fa;
+    padding: 3px 6px;
+    border-radius: 3px;
+    font-size: 0.85em;
+  }
+}
+
+// Styles pour le message "aucun résultat"
+.no-results {
+  padding: 40px 20px;
+  text-align: center;
+  
+  i {
+    font-size: 48px;
+    color: #ccc;
+    margin-bottom: 15px;
+    display: block;
+  }
+  
+  h5 {
+    color: #495057;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    color: #6c757d;
+  }
+}
+
+// Style pour le modal de détails
+.payment-detail-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+  animation: fadeIn 0.3s ease;
+}
+
+.payment-detail-content {
+  background-color: #fff;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+.payment-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.payment-detail-header h4 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.payment-detail-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #777;
+  cursor: pointer;
+}
+
+.payment-detail-body {
+  padding: 20px;
+}
+
+.detail-item {
+  margin-bottom: 15px;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.detail-value {
+  color: #212529;
+}
+
+.detail-value.metadata {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  overflow-x: auto;
+  
+  pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+}
+
+.payment-detail-footer {
+  padding: 15px 20px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

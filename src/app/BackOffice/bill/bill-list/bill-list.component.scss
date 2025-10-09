@@ -1,0 +1,549 @@
+.card {
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.card-header {
+  background-color: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 15px 20px;
+}
+
+.card-title {
+  margin-bottom: 0;
+  font-weight: 600;
+}
+
+.text-muted {
+  color: #6c757d !important;
+  font-style: italic;
+}
+
+.table {
+  thead {
+    th {
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      border-bottom: 2px solid #dee2e6;
+    }
+  }
+  
+  tbody {
+    td {
+      vertical-align: middle;
+    }
+  }
+}
+
+.badge {
+  padding: 0.5em 0.8em;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: normal;
+  
+  &.bg-success {
+    background-color: #28a745 !important;
+  }
+  
+  &.bg-info {
+    background-color: #17a2b8 !important;
+  }
+  
+  &.bg-warning {
+    background-color: #ffc107 !important;
+    color: #212529;
+  }
+  
+  &.bg-danger {
+    background-color: #dc3545 !important;
+  }
+  
+  &.bg-primary {
+    background-color: #007bff !important;
+  }
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+  
+  i {
+    font-size: 1.1rem;
+  }
+}
+
+// Ajouter un style spécifique pour les stocks associés
+.stock-info {
+  font-style: italic;
+  color: #6c757d;
+  
+  &.not-associated {
+    opacity: 0.7;
+  }
+}
+
+/* Ajout de styles pour améliorer la visibilité du nom de stock */
+.stock-name {
+  display: inline-block;
+  padding: 4px 8px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  font-weight: 500;
+  color: #495057;
+  border: 1px solid #ced4da;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  
+  &:hover {
+    background-color: #dee2e6;
+  }
+
+  .stock-id {
+    color: #6c757d;
+    font-size: 0.8rem;
+    margin-left: 4px;
+  }
+}
+
+.loading-stock {
+  font-style: italic;
+  color: #6c757d;
+  display: inline-block;
+  &::after {
+    content: "...";
+    animation: ellipsis 1.5s infinite;
+  }
+}
+
+.loading-indicator {
+  display: inline-block;
+  animation: pulse 1.5s infinite;
+  
+  @keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+}
+
+@keyframes ellipsis {
+  0% { content: "."; }
+  33% { content: ".."; }
+  66% { content: "..."; }
+}
+
+// Ajout d'un style pour le tooltip
+.stock-tooltip {
+  position: relative;
+  cursor: pointer;
+  
+  &:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #333 transparent transparent transparent;
+    }
+  }
+}
+
+/* Styles pour la barre de recherche */
+.search-container {
+  position: relative;
+  
+  .input-group {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    
+    input {
+      border-right: none;
+      &:focus {
+        box-shadow: none;
+        border-color: #ced4da;
+      }
+    }
+    
+    .input-group-text {
+      background-color: #f8f9fa;
+      border-left: none;
+      
+      i {
+        color: #6c757d;
+      }
+    }
+  }
+  
+  small {
+    display: block;
+    margin-top: 0.5rem;
+    text-align: right;
+  }
+}
+
+/* Animation pour la barre de recherche */
+@keyframes highlight {
+  0% { background-color: transparent; }
+  50% { background-color: rgba(253, 190, 51, 0.2); }
+  100% { background-color: transparent; }
+}
+
+.table tbody tr {
+  transition: background-color 0.3s ease;
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+}
+
+/* Style pour les résultats de recherche */
+.table tbody tr.highlight {
+  animation: highlight 1.5s ease;
+}
+
+.search-highlight {
+  animation: highlight 1.5s ease;
+}
+
+/* Styles pour les filtres */
+.filters {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  
+  label {
+    font-size: 0.85rem;
+    color: #495057;
+    margin-bottom: 0;
+    white-space: nowrap;
+  }
+  
+  select.form-control {
+    height: 38px;
+    font-size: 0.9rem;
+    flex-grow: 1;
+    
+    &:focus {
+      border-color: #fdbe33;
+      box-shadow: 0 0 0 0.2rem rgba(253, 190, 51, 0.25);
+    }
+  }
+}
+
+/* Nouveaux styles pour les filtres */
+.filter-panel {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  
+  .filter-label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #495057;
+    margin-bottom: 8px;
+  }
+  
+  .input-group {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    
+    input, .input-group-text {
+      border: none;
+      background-color: white;
+    }
+    
+    .input-group-text {
+      i {
+        color: #007bff;
+        font-size: 1.1rem;
+      }
+    }
+  }
+  
+  .custom-select {
+    height: 38px;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    background-color: white;
+    padding-left: 12px;
+    transition: all 0.2s ease;
+    
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(253, 190, 51, 0.25);
+    }
+  }
+  
+  .btn-create {
+    width: 100%;
+    border-radius: 6px;
+    background-color: #fdbe33;
+    border: none;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    
+    &:hover {
+      background-color: darken(#fdbe33, 10%);
+    }
+    
+    i {
+      margin-right: 5px;
+    }
+  }
+}
+
+.filter-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  .applied-filters {
+    display: flex;
+    flex-wrap: wrap;
+    
+    .filter-tag {
+      background-color: #e9ecef;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-right: 10px;
+      margin-bottom: 5px;
+      display: inline-flex;
+      align-items: center;
+      
+      i {
+        margin-left: 5px;
+        cursor: pointer;
+        font-size: 0.8rem;
+        opacity: 0.7;
+        
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+    
+    .btn-link {
+      font-size: 0.85rem;
+      padding: 0;
+      margin-left: 10px;
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  
+  .results-count {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #495057;
+  }
+}
+
+/* Animation pour les filtres et résultats */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.filter-tag {
+  animation: fadeIn 0.3s ease;
+}
+
+tr {
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: rgba(253, 190, 51, 0.05);
+  }
+}
+
+/* Animation pour les filtres */
+@keyframes pulse-border {
+  0% { border-color: #dee2e6; }
+  50% { border-color: #fdbe33; }
+  100% { border-color: #dee2e6; }
+}
+
+.filter-active {
+  animation: pulse-border 1.5s infinite;
+}
+
+/* Style amélioré pour le bouton de création */
+.custom-create-btn {
+  position: relative;
+  width: 100%;
+  padding: 10px 15px;
+  background: linear-gradient(135deg, #fdbe33 0%, #ffa500 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(253, 190, 51, 0.3);
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.4s;
+    transform: skewX(-20deg);
+  }
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(253, 190, 51, 0.4);
+    
+    &::before {
+      left: 100%;
+    }
+  }
+  
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(253, 190, 51, 0.4);
+  }
+  
+  .btn-icon {
+    display: inline-block;
+    margin-right: 6px;
+    
+    i {
+      font-size: 1.2rem;
+      vertical-align: middle;
+      margin-top: -2px;
+    }
+  }
+  
+  .btn-text {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 0.75rem;
+    padding: 8px 12px;
+    
+    .btn-icon i {
+      font-size: 1rem;
+    }
+  }
+}
+
+/* Animation pour mettre en valeur le bouton lors du chargement de la page */
+@keyframes pulse-button {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.custom-create-btn {
+  animation: pulse-button 1.5s ease-in-out;
+}
+
+/* Style pour l'affichage du stock */
+.stock-name {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  background-color: #f0f3f6;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #495057;
+  border: 1px solid #dee2e6;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  
+  &:hover {
+    background-color: #e5e9ed;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  &.loading-indicator {
+    color: #6c757d;
+    font-style: italic;
+    background-color: #e9ecef;
+    position: relative;
+    overflow: hidden;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      left: -45%;
+      height: 100%;
+      width: 45%;
+      top: 0;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
+      animation: shimmer 1s infinite;
+      transform: skewX(-25deg);
+    }
+  }
+}
+
+.stock-info {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  
+  &.not-associated {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    left: -45%;
+  }
+  100% {
+    left: 100%;
+  }
+}

@@ -1,0 +1,101 @@
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h4>All Advance Requests</h4>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-8">
+                    <div class="input-group shadow-sm">
+                        
+                        <input 
+                            type="text" 
+                            class="form-control border-left-0"
+                            style="border-right: none;"
+                            placeholder="Search by amount or reason..." 
+                            [(ngModel)]="searchTerm"
+                            (keyup)="onSearch()">
+                        <div class="input-group-append" *ngIf="searchTerm">
+                            <button class="btn btn-outline-secondary border-left-0" 
+                                    (click)="clearSearch()">
+                                <i class="pe-7s-close"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-control shadow-sm" 
+                            [(ngModel)]="statusFilter" 
+                            (change)="onStatusFilter()">
+                        <option value="">Filter by Status</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            
+                            <th>Amount</th>
+                            <th>Request Date</th>
+                            <th>Reason</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let advance of advances | paginate: { itemsPerPage: itemsPerPage, currentPage: p, totalItems: advances.length }">
+                            
+                            <td>{{ advance.amount_request | currency }}</td>
+                            <td>{{ advance.requestDate | date:'mediumDate' }}</td>
+                            <td [innerHTML]="advance.reason | safeHtml"></td>
+                            <td>
+                                <span class="badge" [ngClass]="{
+                                    'badge-warning': advance.status === 'Pending',
+                                    'badge-success': advance.status === 'Approved',
+                                    'badge-danger': advance.status === 'Rejected'
+                                }">
+                                    {{ advance.status }}
+                                </span>
+                            </td>
+                            <td>
+                                <button class="btn btn-success btn-sm mr-2" 
+                                        (click)="onApprove(advance.id)"
+                                        [disabled]="advance.status !== 'Pending' || !approvalStatus[advance.id]">
+                                    <i class="pe-7s-check"></i> Approve
+                                </button>
+                                <button class="btn btn-danger btn-sm" 
+                                        (click)="onReject(advance.id)"
+                                        [disabled]="advance.status !== 'Pending' || approvalStatus[advance.id]">
+                                    <i class="pe-7s-close-circle"></i> Reject
+                                </button>
+                            </td>
+                        </tr>
+                        <tr *ngIf="advances.length === 0">
+                            <td colspan="6" class="text-center">No advances found</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <div>
+                        <select class="form-control" [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange()">
+                            <option value="5">5 items</option>
+                            <option value="10">10 items</option>
+                            <option value="20">20 items</option>
+                        </select>
+                    </div>
+                    <pagination-controls
+                        (pageChange)="p = $event"
+                        previousLabel="Previous"
+                        nextLabel="Next"
+                        [responsive]="true"
+                        class="my-pagination">
+                    </pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

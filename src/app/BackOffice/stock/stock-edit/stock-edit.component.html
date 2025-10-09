@@ -1,0 +1,92 @@
+
+
+<!-- Edit Stock Content -->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Edit Stock</h4>
+                        <p class="card-category">Update stock information</p>
+                    </div>
+                    <div class="card-body">
+                        <form *ngIf="stock" (ngSubmit)="updateStock()">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input type="text" class="form-control" 
+                                               [ngClass]="{'is-invalid': formErrors.name}"
+                                               [(ngModel)]="stock.name" 
+                                               name="name"
+                                               (blur)="validateName(stock.name)">
+                                        <div class="invalid-feedback" *ngIf="formErrors.name">
+                                            {{ formErrors.name }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Category</label>
+                                        <select class="form-control" [(ngModel)]="stock.category" name="category">
+                                            <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Quantity</label>
+                                        <input type="number" class="form-control" 
+                                               [ngClass]="{'is-invalid': formErrors.quantity}"
+                                               [(ngModel)]="stock.quantity" 
+                                               name="quantity"
+                                               (blur)="validateQuantity(stock.quantity)">
+                                        <div class="invalid-feedback" *ngIf="formErrors.quantity">
+                                            {{ formErrors.quantity }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Unit Price</label>
+                                        <input type="number" class="form-control" 
+                                               [ngClass]="{'is-invalid': formErrors.unitPrice}"
+                                               [(ngModel)]="stock.unitPrice" 
+                                               name="unitPrice"
+                                               (blur)="validateUnitPrice(stock.unitPrice)">
+                                        <div class="invalid-feedback" *ngIf="formErrors.unitPrice">
+                                            {{ formErrors.unitPrice }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea class="form-control" 
+                                                 [ngClass]="{'is-invalid': formErrors.description}"
+                                                 [(ngModel)]="stock.description" 
+                                                 name="description"
+                                                 (blur)="validateDescription(stock.description)"></textarea>
+                                        <div class="invalid-feedback" *ngIf="formErrors.description">
+                                            {{ formErrors.description }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary">Update Stock</button>
+                                    <button type="button" class="btn btn-secondary ml-2" (click)="cancel()">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Start -->
+<!-- ... footer content ... --> 

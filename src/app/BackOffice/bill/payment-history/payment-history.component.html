@@ -1,0 +1,207 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title">Historique des Paiements</h4>
+            <div>
+              <button class="btn btn-primary me-2" (click)="exportToCsv()">
+                <i class="pe-7s-download"></i> Exporter CSV
+              </button>
+              <button class="btn btn-info" (click)="loadPaymentHistory()">
+                <i class="pe-7s-refresh"></i> Actualiser
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <!-- Filtres -->
+          <div class="filters-section mb-4">
+            <form [formGroup]="filterForm">
+              <div class="row g-3 align-items-end">
+                <div class="col-md-2">
+                  <label class="form-label">Date début</label>
+                  <input type="date" class="form-control" formControlName="startDate">
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Date fin</label>
+                  <input type="date" class="form-control" formControlName="endDate">
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label">Statut</label>
+                  <select class="form-select" formControlName="status">
+                    <option value="ALL">Tous</option>
+                    <option value="succeeded">Réussi</option>
+                    <option value="processing">En cours</option>
+                    <option value="requires_payment_method">En attente</option>
+                    <option value="canceled">Annulé</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">Recherche</label>
+                  <input type="text" class="form-control" placeholder="N° Facture ou ID Paiement" formControlName="searchTerm">
+                </div>
+                <div class="col-md-2">
+                  <button type="button" class="btn btn-secondary w-100" (click)="clearFilters()">
+                    Effacer filtres
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          
+          <!-- Statistiques -->
+          <div class="stats-section mb-4">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="stat-card">
+                  <div class="stat-card-body">
+                    <div class="stat-card-icon">
+                      <i class="pe-7s-cash"></i>
+                    </div>
+                    <div class="stat-card-info">
+                      <div class="stat-card-title">Total payé</div>
+                      <div class="stat-card-value">{{ totalAmount | currency:'EUR' }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="stat-card">
+                  <div class="stat-card-body">
+                    <div class="stat-card-icon">
+                      <i class="pe-7s-note"></i>
+                    </div>
+                    <div class="stat-card-info">
+                      <div class="stat-card-title">Nb transactions</div>
+                      <div class="stat-card-value">{{ filteredPayments.length }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Loading indicator -->
+          <div *ngIf="loading" class="text-center p-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Chargement...</span>
+            </div>
+          </div>
+
+          <!-- Error message avec plus d'informations -->
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            <i class="pe-7s-info me-2"></i>
+            {{ errorMessage }}
+            <button class="btn btn-sm btn-outline-danger ms-3" (click)="initializeStaticData()">
+              Charger les données de démonstration
+            </button>
+          </div>
+
+          <!-- Tableau des paiements -->
+          <div class="table-responsive" *ngIf="!loading && filteredPayments.length > 0">
+            <table class="table">
+              <thead class="text-primary">
+                <tr>
+                  <th>Date</th>
+                  <th>N° Facture</th>
+                  <th>ID Paiement</th>
+                  <th>Montant</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let payment of filteredPayments">
+                  <td>{{ getFormattedDate(payment.date) }}</td>
+                  <td>{{ payment.billNumber }}</td>
+                  <td><span class="payment-id">{{ payment.paymentId }}</span></td>
+                  <td>{{ payment.amount | currency:'EUR' }}</td>
+                  <td>
+                    <span [ngClass]="'badge ' + getStatusClass(payment.status)">
+                      {{ getStatusDisplay(payment.status) }}
+                    </span>
+                  </td>
+                  <td>
+                    <button class="btn btn-info btn-sm" (click)="viewPaymentDetails(payment)">
+                      <i class="pe-7s-look"></i> Détails
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <!-- Aucun résultat - amélioré avec plus d'informations -->
+          <div *ngIf="!loading && filteredPayments.length === 0" class="text-center py-5">
+            <div class="no-results">
+              <i class="pe-7s-search"></i>
+              <h5>Aucun paiement trouvé</h5>
+              <p>Essayez de modifier vos filtres ou vérifiez ultérieurement</p>
+              <button class="btn btn-outline-primary mt-3" (click)="clearFilters()">
+                <i class="pe-7s-refresh-2"></i> Réinitialiser les filtres
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal détails de paiement -->
+<div class="payment-detail-modal" *ngIf="selectedPayment" (click)="closeDetails()">
+  <div class="payment-detail-content" (click)="$event.stopPropagation()">
+    <div class="payment-detail-header">
+      <h4>Détails du paiement</h4>
+      <button class="payment-detail-close" (click)="closeDetails()">&times;</button>
+    </div>
+    <div class="payment-detail-body">
+      <div class="detail-item">
+        <div class="detail-label">Numéro de facture</div>
+        <div class="detail-value">{{ selectedPayment.billNumber }}</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">ID du paiement</div>
+        <div class="detail-value">{{ selectedPayment.paymentId }}</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Date</div>
+        <div class="detail-value">{{ getFormattedDate(selectedPayment.date) }}</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Montant</div>
+        <div class="detail-value">{{ selectedPayment.amount | currency:'EUR' }}</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Statut</div>
+        <div class="detail-value">
+          <span [ngClass]="'badge ' + getStatusClass(selectedPayment.status)">
+            {{ getStatusDisplay(selectedPayment.status) }}
+          </span>
+        </div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Méthode de paiement</div>
+        <div class="detail-value">{{ selectedPayment.paymentMethod || 'Carte de crédit' }}</div>
+      </div>
+      
+      <hr class="my-3">
+      
+      <div class="detail-item" *ngIf="selectedPayment.metadata">
+        <div class="detail-label">Métadonnées</div>
+        <div class="detail-value metadata">
+          <pre>{{ selectedPayment.metadata | json }}</pre>
+        </div>
+      </div>
+    </div>
+    <div class="payment-detail-footer">
+      <a *ngIf="selectedPayment.billId" class="btn btn-primary" [routerLink]="['/admin/bill/view', selectedPayment.billId]">
+        Voir la facture
+      </a>
+      <button class="btn btn-secondary" (click)="closeDetails()">Fermer</button>
+    </div>
+  </div>
+</div>

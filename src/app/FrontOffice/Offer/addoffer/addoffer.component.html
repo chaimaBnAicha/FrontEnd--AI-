@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Builderz - Construction Company Website Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Construction Company Website Template" name="keywords">
+        <meta content="Construction Company Website Template" name="description">
+        <!-- Include jQuery (required for CounterUp) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include CounterUp -->
+<script src="https://cdn.rawgit.com/barskins/jquery-countTo/master/jquery.counterup.min.js"></script>
+
+
+        <!-- Favicon -->
+        <link href="assets/img/favicon.ico" rel="icon">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/src/assets/lib/flaticon/font/flaticon.css">
+        <link rel="stylesheet" href="/src/assets/lib/animate/animate.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/owlcarousel/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/lightbox/css/lightbox.min.css">
+        <link rel="stylesheet" href="/src/assets/lib/slick/slick.css">
+        <link rel="stylesheet" href="/src/assets/lib/slick/slick-theme.css">
+        <link rel="stylesheet" href="/src/assets/css/style.css">
+    </head>
+
+    <body>
+        <div class="wrapper">
+             
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center py-3">
+          <h3 class="mb-0">Add New Offer</h3>
+          <button class="btn btn-light" (click)="onCancel()">
+            <i class="fas fa-arrow-left"></i> Back to Offers
+          </button>
+        </div>
+        <div class="card-body">
+          <!-- Add alert messages -->
+          <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>
+            {{ successMessage }}
+            <button type="button" class="btn-close" (click)="successMessage = ''"></button>
+          </div>
+
+          <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>
+            {{ errorMessage }}
+            <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+          </div>
+
+          <form [formGroup]="offerForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="Title" class="form-label">Title*</label>
+              <input
+                type="text"
+                class="form-control"
+                id="Title"
+                formControlName="Title"
+                [ngClass]="{ 'is-invalid': submitted && f['Title'].errors }"
+              />
+              <div *ngIf="submitted && f['Title'].errors" class="invalid-feedback">
+                <div *ngIf="f['Title'].errors['required']">Title is required</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="Description">Description*</label>
+              <editor
+                formControlName="Description"
+                [init]="editorConfig"
+                id="Description"
+                name="Description"
+                apiKey="bs8c5xfp5pctmes93wot5hlcmxuowt2wk3j2437fw51e5xvt"
+                [inline]="false"
+               
+              ></editor>
+              <div class="text-danger" *ngIf="f['Description'].touched && f['Description'].errors?.['required']">
+                <small>Description is required</small>
+              </div>
+            </div>
+            
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="Start_Date" class="form-label">Start Date*</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="Start_Date"
+                  formControlName="Start_Date"
+                  [min]="today"
+                  (change)="onStartDateChange()"
+                  [ngClass]="{ 'is-invalid': submitted && f['Start_Date'].errors }"
+                />
+                <div *ngIf="submitted && f['Start_Date'].errors" class="invalid-feedback">
+                  <div *ngIf="f['Start_Date'].errors['required']">Start date is required</div>
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="End_Date" class="form-label">End Date*</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="End_Date"
+                  formControlName="End_Date"
+                  [ngClass]="{ 'is-invalid': submitted && (f['End_Date'].errors || offerForm.errors?.['dateError']) }"
+                />
+                <div *ngIf="submitted && (f['End_Date'].errors || offerForm.errors?.['dateError'])" class="invalid-feedback">
+                  <div *ngIf="f['End_Date'].errors?.['required']">End date is required</div>
+                  <div *ngIf="offerForm.errors?.['dateError']">{{getDateErrorMessage()}}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="Typeoffer" class="form-label">Type*</label>
+              <select
+                class="form-control"
+                id="Typeoffer"
+                formControlName="Typeoffer"
+              >
+                <option [ngValue]="TypeOffer.Insurance">Insurance</option>
+                <option [ngValue]="TypeOffer.Bonus">Bonus</option>
+                <option [ngValue]="TypeOffer.Compensation">Compensation</option>
+                <option [ngValue]="TypeOffer.Training">Training</option>
+              </select>
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+              <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+              <div>
+                <button type="button" class="btn btn-warning me-2" (click)="onReset()">Reset</button>
+                <button type="submit" class="btn btn-primary">Create Offer</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.card {
+  border: none;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+.card-header {
+  border-radius: 10px 10px 0 0 !important;
+  background-color: #fdbe33 !important;
+  border-bottom: none;
+}
+
+.card-header h3 {
+  color: #030f27 !important;
+  font-weight: 700;
+}
+
+.btn-light {
+  background-color: #030f27;
+  border: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s;
+  color: #fdbe33;
+}
+
+.btn-light:hover {
+  background-color: #fdbe33;
+  color: #030f27;
+}
+
+.form-label {
+  color: #030f27;
+  font-weight: 500;
+}
+
+.form-control {
+  border-color: #eeeeee;
+  padding: 0.75rem;
+}
+
+.form-control:focus {
+  border-color: #fdbe33;
+  box-shadow: 0 0 0 0.2rem rgba(253, 190, 51, 0.25);
+}
+
+.btn-primary {
+  background-color: #fdbe33;
+  border-color: #fdbe33;
+  color: #030f27;
+}
+
+.btn-primary:hover {
+  background-color: #030f27;
+  border-color: #030f27;
+  color: #fdbe33;
+}
+
+.btn-secondary {
+  background-color: #030f27;
+  border-color: #030f27;
+  color: #fdbe33;
+}
+
+.btn-secondary:hover {
+  background-color: #fdbe33;
+  border-color: #fdbe33;
+  color: #030f27;
+}
+
+.btn-warning {
+  background-color: transparent;
+  border-color: #fdbe33;
+  color: #030f27;
+}
+
+.btn-warning:hover {
+  background-color: #fdbe33;
+  color: #030f27;
+}
+
+.invalid-feedback {
+  color: #dc3545;
+}
+
+.shadow-lg {
+  box-shadow: 0 0.5rem 1rem rgba(3, 15, 39, 0.15) !important;
+}
+
+/* Add styles for alerts */
+.alert {
+  border: none;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.alert-success {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
+}
+
+.alert-danger {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #F44336;
+}
+
+.btn-close {
+  font-size: 0.875rem;
+  opacity: 0.75;
+}
+
+.btn-close:hover {
+  opacity: 1;
+}
+
+.fade.show {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+
+ 
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+</div>

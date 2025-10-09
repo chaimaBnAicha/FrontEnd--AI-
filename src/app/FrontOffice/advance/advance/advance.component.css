@@ -1,0 +1,130 @@
+/* Construction theme styling */
+.card-header {
+    background-color: #fdbe33 !important;  /* Construction yellow */
+    border: none;
+}
+
+.card-header h4 {
+    color: #030f27 !important;  /* Dark blue/black */
+    font-weight: bold;
+    margin: 0;
+}
+
+.btn-light {
+    background-color: #030f27;
+    color: #fdbe33;
+    border: 2px solid #fdbe33;
+    transition: 0.3s;
+}
+
+.btn-light:hover {
+    background-color: #fdbe33;
+    color: #030f27;
+}
+
+.table thead th {
+    background-color: #030f27;
+    color: #fdbe33;
+    border-color: #fdbe33;
+}
+
+.badge {
+    padding: 8px 12px;
+    font-size: 0.9em;
+}
+
+.badge-warning {
+    background-color: #fdbe33 !important;
+    color: #030f27 !important;
+}
+
+.badge-success {
+    background-color: #28a745 !important;
+    color: white !important;
+}
+
+.badge-danger {
+    background-color: #dc3545 !important;
+    color: white !important;
+}
+
+.btn-info, .btn-danger {
+    margin: 0 3px;
+    padding: 5px 10px;
+}
+
+.btn-info:disabled, .btn-danger:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.card {
+    border: 2px solid #fdbe33;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* Add these styles */
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+    margin: 0 3px;
+    padding: 5px 10px;
+}
+
+.btn-success:hover:not([disabled]) {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.btn-success:disabled, .btn-danger:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.input-group input:focus {
+    box-shadow: none;
+    border-color: #ced4da;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #ced4da;
+}
+
+.shadow-sm {
+    transition: all 0.3s ease;
+}
+
+.shadow-sm:hover {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1)!important;
+}
+
+.btn-outline-secondary {
+    border-color: #ced4da;
+    color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #f8f9fa;
+    color: #dc3545;
+}
+.my-pagination ::ng-deep .ngx-pagination {
+    margin: 0;
+    padding: 0;
+}
+
+.my-pagination ::ng-deep .ngx-pagination .current {
+    background: #fdbe33;
+    border-radius: 4px;
+}
+
+.my-pagination ::ng-deep .ngx-pagination a:hover {
+    background: #030f27;
+    color: #fdbe33;
+    border-radius: 4px;
+}

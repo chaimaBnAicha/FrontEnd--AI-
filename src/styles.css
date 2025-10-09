@@ -1,0 +1,43 @@
+/* Réinitialiser les marges et paddings globalement */
+html, body {
+    height: 100%;
+    margin: 0; /* Retirer les marges par défaut */
+    padding: 0; /* Retirer les paddings par défaut */
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
+  
+  /* Assurez-vous que le body prend toute la largeur de la page */
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    width: 100%;
+    overflow-x: hidden; /* Éviter le débordement horizontal */
+  }
+  
+  /* Ajustement pour les containers */
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  /* Exemple pour un container spécifique, si nécessaire */
+  .main-container {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Réduire les marges de tout autre élément si nécessaire */
+  .some-class {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Évitez les marges indésirables sur les tables */
+  table {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  

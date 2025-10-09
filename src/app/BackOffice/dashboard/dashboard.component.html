@@ -1,0 +1,40 @@
+<div class="container-fluid py-4">
+    <!-- Advance Request Statistics Section -->
+    <div class="statistics-container mb-4">
+        <h1 class="title">Advance Request Statistics</h1>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h2>Request Status Distribution</h2>
+                <app-pie-chart></app-pie-chart>
+            </div>
+            <div class="chart-card">
+                <h2>Sinusoidal Trend</h2>
+                <app-sinusoidal></app-sinusoidal>
+            </div>
+        </div>
+        <div class="chart-card">
+            <h2>Monthly Requests</h2>
+            <app-bar-chart></app-bar-chart>
+        </div>
+    </div>
+
+    <!-- Leave Statistics Section -->
+    <div class="statistics-container">
+        <h1 class="title">Leave Statistics</h1>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h2>Leave Type Distribution</h2>
+                <app-leave-pie-chart></app-leave-pie-chart>
+            </div>
+            <div class="chart-card">
+                <h2>Average Leave Duration</h2>
+                <app-leave-sinusoidal></app-leave-sinusoidal>
+            </div>
+        </div>
+        <div class="chart-card">
+            <h2>Monthly Approved Leaves</h2>
+            <app-leave-bar-chart></app-leave-bar-chart>
+        </div>
+    </div>
+</div>
+  

@@ -1,0 +1,179 @@
+/* Styles pour le stepper */
+::ng-deep .mat-horizontal-stepper-header {
+  background: transparent !important;
+  color: #fdbe33 !important;
+  padding: 20px !important;
+  font-family: 'Poppins', sans-serif;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+::ng-deep .mat-horizontal-stepper-header-container {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+::ng-deep .mat-stepper-horizontal {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+::ng-deep .mat-stepper-horizontal-line {
+  border-top-color: #fdbe33 !important;
+  margin: 0 8px !important;
+}
+
+::ng-deep .mat-step-header {
+  background: transparent !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+}
+
+::ng-deep .mat-step-header .mat-step-icon {
+  background-color: #fdbe33 !important;
+  color: #030f27 !important;
+  font-size: 1.5rem;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin: 0 8px;
+}
+
+::ng-deep .mat-step-header .mat-step-label {
+  color: #030f27 !important;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+::ng-deep .mat-step-header.mat-step-active .mat-step-label {
+  color: #fdbe33 !important;
+}
+
+::ng-deep .mat-step-header:hover {
+  background: transparent !important;
+}
+
+::ng-deep .mat-step-header.mat-step-active .mat-step-icon {
+  background-color: #030f27 !important;
+  color: #fdbe33 !important;
+  border: 2px solid #fdbe33;
+}
+
+::ng-deep .mat-step-header.mat-step-completed .mat-step-icon {
+  background-color: #28a745 !important;
+  color: #ffffff !important;
+}
+
+
+/* Modification des icônes d'étape */
+::ng-deep .mat-step-header.mat-step-active .mat-step-icon {
+  background-color: #030f27 !important;
+  color: #fdbe33 !important;
+}
+
+::ng-deep .mat-step-header.mat-step-completed .mat-step-icon {
+  background-color: #28a745 !important;
+  color: #ffffff !important;
+}
+
+/* Styles pour les formulaires */
+.form-group label {
+  color: #030f27;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.form-control {
+  border: 2px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  transition: all 0.3s;
+  font-size: 1rem;
+}
+
+.form-control:focus {
+  border-color: #fdbe33;
+  box-shadow: none;
+}
+
+/* Styles pour les boutons */
+.btn {
+  padding: 12px 25px;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.3s;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: #fdbe33;
+  border-color: #fdbe33;
+  color: #030f27;
+}
+
+.btn-primary:hover {
+  background: #030f27;
+  border-color: #030f27;
+  color: #fdbe33;
+}
+
+.btn-secondary {
+  background: #030f27;
+  border-color: #030f27;
+  color: #ffffff;
+}
+
+.btn-secondary:hover {
+  background: #fdbe33;
+  border-color: #fdbe33;
+  color: #030f27;
+}
+
+/* Styles pour les sections d'information */
+.bg-light {
+  background-color: #f8f9fa !important;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Styles pour la carte */
+#map {
+  border: 2px solid #e9ecef;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Styles pour les messages d'erreur */
+mat-error {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 4px;
+}
+
+/* Styles pour le résumé */
+.rounded {
+  border-radius: 4px !important;
+}
+
+.rounded p {
+  margin-bottom: 10px;
+  color: #666666;
+}
+
+.rounded strong {
+  color: #030f27;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.container {
+  animation: fadeIn 0.5s ease-in-out;
+}
