@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { LeaveService } from 'src/app/Service/leave.service';
+import { LeaveAIService } from 'src/app/Service/leave-ai.service';
 import { Leave, LeaveStatus } from 'src/app/models/leave.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LeaveAnalysisModalComponent } from './leave-analysis-modal.component';
 
 @Component({
   selector: 'app-leave-back',
@@ -14,11 +17,20 @@ export class LeaveBackComponent implements OnInit {
   originalLeaves: Leave[] = [];
   p: number = 1;
   itemsPerPage: number = 5;
-  LeaveStatus = LeaveStatus; // Make enum available to template
-  canAcceptMap: { [key: number]: boolean } = {};
-  loadingMap: { [key: number]: boolean } = {};
+  LeaveStatus = LeaveStatus;
+  canAcceptMap: { [key: string]: boolean } = {};
+  loadingMap: { [key: string]: boolean } = {};
+  aiAnalysis: { [key: string]: {
+    confidenceScore: number;
+    analysisResult: string;
+    recommendedApproval: boolean;
+  } } = {};
 
-  constructor(private leaveService: LeaveService) {}
+  constructor(
+    private leaveService: LeaveService,
+    private leaveAIService: LeaveAIService,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit() {
     this.loadLeaves();
@@ -27,12 +39,64 @@ export class LeaveBackComponent implements OnInit {
   loadLeaves() {
     this.leaveService.getLeaves().subscribe({
       next: (data) => {
+        console.log('Leaves loaded:', data); // Debug log
         this.leaves = data;
         this.originalLeaves = [...data];
         this.checkCanAcceptForAllLeaves(data);
+        
+        // Process each leave one by one for AI analysis
+        data.forEach(leave => {
+          if (leave.id) {
+            this.analyzeLeave(leave);
+          }
+        });
       },
       error: (error) => {
         console.error('Error loading leaves:', error);
+      }
+    });
+  }
+
+  private analyzeLeave(leave: Leave) {
+    const leaveId = leave.id?.toString() || '';
+    console.log('Analyzing leave:', leaveId, leave); // Debug log
+    
+    // Set a loading state
+    this.aiAnalysis[leaveId] = {
+      confidenceScore: 0,
+      analysisResult: 'Loading...',
+      recommendedApproval: false
+    };
+    
+    this.leaveAIService.analyzeLeaveRequest(leave).subscribe({
+      next: (analysis) => {
+        console.log('AI analysis received for leave:', leaveId, analysis);
+        this.aiAnalysis[leaveId] = analysis;
+      },
+      error: (error) => {
+        console.error('Error getting AI analysis for leave:', leaveId, error);
+        // Set error state in analysis
+        this.aiAnalysis[leaveId] = {
+          confidenceScore: 0,
+          analysisResult: 'Error analyzing leave request. Please try again.',
+          recommendedApproval: false
+        };
+      }
+    });
+  }
+
+  private analyzeAllLeaves(leaves: Leave[]) {
+    leaves.forEach(leave => {
+      if (leave.id) {
+        const leaveId = leave.id.toString();
+        this.leaveAIService.analyzeLeaveRequest(leave).subscribe({
+          next: (analysis) => {
+            this.aiAnalysis[leaveId] = analysis;
+          },
+          error: (error) => {
+            console.error('Error getting AI analysis:', error);
+          }
+        });
       }
     });
   }
@@ -127,6 +191,18 @@ export class LeaveBackComponent implements OnInit {
   isLoading(leave: Leave): boolean {
     const leaveId = leave.id;
     return typeof leaveId === 'number' && this.loadingMap[leaveId] === true;
+  }
+
+  openAiModal(leave: Leave) {
+    const leaveId = leave.id?.toString() || '';
+    if (this.aiAnalysis[leaveId]) {
+      const modalRef = this.modalService.open(LeaveAnalysisModalComponent, {
+        centered: true,
+        backdrop: 'static',
+        keyboard: false
+      });
+      modalRef.componentInstance.analysis = this.aiAnalysis[leaveId];
+    }
   }
 
   downloadDocument(leave: Leave) {

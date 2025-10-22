@@ -1,25 +1,4 @@
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- Include CounterUp -->
-<script src="https://cdn.rawgit.com/barskins/jquery-countTo/master/jquery.counterup.min.js"></script>
-
-
-        <!-- Favicon -->
-        <link href="assets/img/favicon.ico" rel="icon">
-
-        <!-- Google Font -->
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-        <!-- CSS Libraries -->
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="/src/assets/lib/flaticon/font/flaticon.css">
-        <link rel="stylesheet" href="/src/assets/lib/animate/animate.min.css">
-        <link rel="stylesheet" href="/src/assets/lib/owlcarousel/assets/owl.carousel.min.css">
-        <link rel="stylesheet" href="/src/assets/lib/lightbox/css/lightbox.min.css">
-        <link rel="stylesheet" href="/src/assets/lib/slick/slick.css">
-        <link rel="stylesheet" href="/src/assets/lib/slick/slick-theme.css">
-        <link rel="stylesheet" href="/src/assets/css/style.css">
 
 <div class="container mt-4">
     <div class="card">
@@ -67,6 +46,7 @@
                             <th>Reason</th>
                             <th>Document</th>
                             <th>Status</th>
+                            <th>AI Analysis</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -99,19 +79,34 @@
                                 </span>
                             </td>
                             <td>
-                                <div class="btn-group">
-                                    <button class="btn btn-success btn-sm" 
+                                <button class="btn btn-info btn-sm" 
+                                        type="button" 
+                                        (click)="openAiModal(leave)"
+                                        title="View AI Analysis"
+                                        [disabled]="!aiAnalysis[leave.id?.toString() || '']">
+                                    <i class="fas fa-brain"></i>
+                                    <span class="d-none d-md-inline ml-1">Analysis</span>
+                                </button>
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Leave actions">
+                                    <button class="btn btn-outline-success btn-sm d-flex align-items-center" 
                                             (click)="updateStatus(leave, LeaveStatus.APPROVED)"
-                                            [disabled]="leave.status === LeaveStatus.APPROVED || leave.status === LeaveStatus.REJECTED || !canAccept(leave) || isLoading(leave)">
+                                            [disabled]="leave.status === LeaveStatus.APPROVED || leave.status === LeaveStatus.REJECTED || isLoading(leave)"
+                                            title="Approve Leave">
                                         <i class="fas" [ngClass]="{'fa-check': !isLoading(leave), 'fa-spinner fa-spin': isLoading(leave)}"></i>
+                                        <span class="d-none d-md-inline ml-1">Approve</span>
                                     </button>
-                                    <button class="btn btn-danger btn-sm" 
+                                    <button class="btn btn-outline-danger btn-sm d-flex align-items-center" 
                                             (click)="updateStatus(leave, LeaveStatus.REJECTED)"
-                                            [disabled]="leave.status === LeaveStatus.REJECTED || leave.status === LeaveStatus.APPROVED || canAccept(leave)">
+                                            [disabled]="leave.status === LeaveStatus.REJECTED || leave.status === LeaveStatus.APPROVED"
+                                            title="Reject Leave">
                                         <i class="fas fa-times"></i>
+                                        <span class="d-none d-md-inline ml-1">Reject</span>
                                     </button>
                                 </div>
                             </td>
+                            
                         </tr>
                     </tbody>
                 </table>
